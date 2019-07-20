@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App/index';
+// import App from './components/App/index';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
@@ -10,6 +10,7 @@ import Sagas from './sagas';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import Registration from "./components/Registration";
 
 //create saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -25,9 +26,11 @@ sagaMiddleware.run(Sagas);
 
 // Render the main component into the dom
 
+// TODO: Change
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+      {/* <App />*/}
+    <Registration/>
   </Provider>,
   document.getElementById('app'));
 

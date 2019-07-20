@@ -1,6 +1,7 @@
-const { List, Map } = require('immutable');
+const {List, Map} = require('immutable');
 
 export default {
+    registration: Map({usernameUnique: false}),
     gallery: Map({
         images: List(),
         openLightBox: false,
@@ -9,8 +10,8 @@ export default {
         galleryWidth: 0
     }),
     app: Map({
-      size: 200,
-      tag: 'art',
-      tags: List()
+        size: 200,
+        tag: 'art',
+        tags: List()
     })
 };
