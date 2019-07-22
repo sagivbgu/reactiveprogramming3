@@ -19,10 +19,17 @@ function validateUsernameUniqueSuccessAction(username, isUnique) {
     }
 }
 
+function locationChangedAction(location) {
+    return {
+        type: RegistrationActionsConstants.LOCATION_CHANGED,
+        payload: location
+    }
+}
+
 let actions = {
     validateUsernameUniqueAction,
-    validateUsernameUniqueSuccessAction
+    validateUsernameUniqueSuccessAction,
+    locationChangedAction
 };
 
 export default actions
-

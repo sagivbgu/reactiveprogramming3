@@ -1,12 +1,16 @@
 import React from 'react';
-import './registration.scss';
 import {connect} from 'react-redux';
+import ReactDropzone from "react-dropzone";
+
+import './registration.scss';
 import actions from './actions';
+import LocationAutoSuggestion from "./LocationAutoSuggestion";
 
 class Registration extends React.Component {
     constructor(props) {
         super(props);
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
+        this.onDrop = this.onDrop.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {username: ""};
@@ -18,9 +22,14 @@ class Registration extends React.Component {
         this.props.validateUsernameUnique(username);
     }
 
+    onDrop(files) {
+        console.log(files);
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
+        console.log('Location: ' + this.props.location);
         if (this.props.usernameUnique) {
             console.log('Submitting');
         } else {
@@ -40,17 +49,39 @@ class Registration extends React.Component {
                     />
                     {this.state.username && !this.props.usernameUnique && 'Username already exists!'}
                 </label>
+                <label>
+                    <div>
+                        Photo:
+                    </div>
+                    <div id='registration-dropzone'>
+                        <ReactDropzone
+                            onDrop={this.onDrop}
+                            accept="image/png, image/jpeg, image/jpg, image/gif"
+                            multiple={false}
+                        >
+                            {({getRootProps, getInputProps}) => (
+                                <div {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    Click or drag to upload a photo
+                                </div>
+                            )}
+                        </ReactDropzone>
+                    </div>
+                </label>
+                <label>
+                    Location:
+                    <LocationAutoSuggestion/>
+                </label>
                 <input type="submit" value="Submit"/>
             </form>
-
         );
     }
 }
 
-
 const mapStateToProps = (state) => {
     return {
-        usernameUnique: state['registration'].get('usernameUnique')
+        usernameUnique: state['registration'].get('usernameUnique'),
+        location: state['registration'].get('location')
     }
 };
 
