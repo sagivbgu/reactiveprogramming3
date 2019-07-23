@@ -13,7 +13,7 @@ class Registration extends React.Component {
         this.onDrop = this.onDrop.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.state = {username: ""};
+        this.state = {username: '', photo: null};
     }
 
     handleChangeUsername(event) {
@@ -24,14 +24,22 @@ class Registration extends React.Component {
 
     onDrop(files) {
         console.log(files);
+        console.log(files[0]);
+        this.setState({photo: files[0]});
     }
 
     handleSubmit(event) {
         event.preventDefault();
+        let {location, usernameUnique} = this.props;
+        let {username, photo} = this.state;
 
-        console.log('Location: ' + this.props.location);
-        if (this.props.usernameUnique) {
+        console.log('Location: ' + location);
+        if (usernameUnique) {
             console.log('Submitting');
+            console.log(username);
+            console.log(location);
+            console.log('photo: ' + JSON.stringify(photo));
+            console.log('unique: ' + usernameUnique);
         } else {
             console.log('Not submitting. Username is not unique.')
         }
@@ -62,7 +70,7 @@ class Registration extends React.Component {
                             {({getRootProps, getInputProps}) => (
                                 <div {...getRootProps()}>
                                     <input {...getInputProps()} />
-                                    Click or drag to upload a photo
+                                    {this.state.photo ? this.state.photo.path : 'Click or drag to upload a photo'}
                                 </div>
                             )}
                         </ReactDropzone>
