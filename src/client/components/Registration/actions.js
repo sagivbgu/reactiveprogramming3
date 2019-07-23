@@ -26,10 +26,22 @@ function locationChangedAction(location) {
     }
 }
 
+function registerUserAction(username, location, photo) {
+    return {
+        type: RegistrationActionsConstants.REGISTER_USER,
+        payload: {
+            username,
+            location,
+            photo
+        }
+    }
+}
+
 let actions = {
     validateUsernameUniqueAction,
     validateUsernameUniqueSuccessAction,
-    locationChangedAction
+    locationChangedAction,
+    registerUserAction
 };
 
 export default actions

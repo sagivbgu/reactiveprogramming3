@@ -40,6 +40,7 @@ class Registration extends React.Component {
             console.log(location);
             console.log('photo: ' + JSON.stringify(photo));
             console.log('unique: ' + usernameUnique);
+            this.props.register(username, location, photo)
         } else {
             console.log('Not submitting. Username is not unique.')
         }
@@ -97,6 +98,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         validateUsernameUnique: (username) => {
             dispatch(actions.validateUsernameUniqueAction(username));
+        },
+        register: (username, location, photo) => {
+            console.log('dispatching ' + JSON.stringify(actions.registerUserAction(username, location, photo)));
+            dispatch(actions.registerUserAction(username, location, photo));
         }
     }
 };
