@@ -19,6 +19,13 @@ function validateUsernameUniqueSuccessAction(username, isUnique) {
     }
 }
 
+function validateUsernameUniqueFailureAction(error) {
+    return {
+        type: RegistrationActionsConstants.VALIDATE_USERNAME_UNIQUE_FAILURE,
+        payload: error
+    }
+}
+
 function locationChangedAction(location) {
     return {
         type: RegistrationActionsConstants.LOCATION_CHANGED,
@@ -47,6 +54,7 @@ function registerUserFailureAction(errorMessage) {
 let actions = {
     validateUsernameUniqueAction,
     validateUsernameUniqueSuccessAction,
+    validateUsernameUniqueFailureAction,
     locationChangedAction,
     registerUserAction,
     registerUserFailureAction

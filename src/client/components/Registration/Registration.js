@@ -56,7 +56,7 @@ class Registration extends React.Component {
                            value={this.state.username}
                            onChange={this.handleChangeUsername}
                     />
-                    {this.state.username && !this.props.usernameUnique && 'Username already exists!'}
+                    <span className='error-message'> {this.state.username && !this.props.usernameUnique && 'Username already exists!'} </span>
                 </label>
                 <label>
                     <div>
@@ -82,7 +82,7 @@ class Registration extends React.Component {
                     <LocationAutoSuggestion/>
                 </label>
                 <input type="submit" value="Submit"/>
-                <div class="error-message"> {this.props.error} </div>
+                <div className="error-message"> {this.props.error} </div>
             </form>
         );
     }

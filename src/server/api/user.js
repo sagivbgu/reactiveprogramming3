@@ -40,4 +40,16 @@ module.exports = (app) => {
                 }
             })
     });
+    app.get('/api/user/exists', function (req, res) {
+        console.log('inside /api/user/exists');
+        let username = req.query.username;
+        UserModel.findOne({username: username})
+            .then(doc => {
+                if (doc != null) {
+                    res.json({username: username, isUnique: false});
+                } else {
+                    res.json({username: username, isUnique: true});
+                }
+            });
+    });
 };
