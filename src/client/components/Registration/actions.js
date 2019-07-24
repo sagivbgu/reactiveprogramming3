@@ -37,11 +37,19 @@ function registerUserAction(username, location, photo) {
     }
 }
 
+function registerUserFailureAction(errorMessage) {
+    return {
+        type: RegistrationActionsConstants.REGISTER_USER_FAILURE,
+        payload: errorMessage
+    }
+}
+
 let actions = {
     validateUsernameUniqueAction,
     validateUsernameUniqueSuccessAction,
     locationChangedAction,
-    registerUserAction
+    registerUserAction,
+    registerUserFailureAction
 };
 
 export default actions

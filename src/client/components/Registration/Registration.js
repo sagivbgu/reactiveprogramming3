@@ -82,6 +82,7 @@ class Registration extends React.Component {
                     <LocationAutoSuggestion/>
                 </label>
                 <input type="submit" value="Submit"/>
+                <div class="error-message"> {this.props.error} </div>
             </form>
         );
     }
@@ -90,7 +91,8 @@ class Registration extends React.Component {
 const mapStateToProps = (state) => {
     return {
         usernameUnique: state['registration'].get('usernameUnique'),
-        location: state['registration'].get('location')
+        location: state['registration'].get('location'),
+        error: state['registration'].get('error')
     }
 };
 

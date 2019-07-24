@@ -35,6 +35,7 @@ function* validateUsernameUnique(action) {
         }*/
 }
 
+// TODO: To utils
 function getBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -47,10 +48,9 @@ function getBase64(file) {
 function* registerUser(action) {
     console.log('inside registerUser Saga. Action=', action);
 
-    const photoContentType = action.payload.photo.type;
-    let {username, location} = action.payload;
-
     try {
+        let {username, location} = action.payload;
+        const photoContentType = action.payload.photo.type;
         let photoBase64 = yield call(getBase64, action.payload.photo);
         let photo = {
             contentType: photoContentType,
@@ -68,9 +68,9 @@ function* registerUser(action) {
 
         const json = yield call([res, 'json']); //retrieve body of response
 
-        yield put(Actions.registerUserSuccessAction(json)); // TODO
+        yield put(Actions.registerUserSuccessAction(json)); // TODO, and on failure create FailureAction
     } catch (e) {
-        yield put(Actions.registerUserFailureAction(e.message)); // TODO
+        yield put(Actions.registerUserFailureAction(e.message));
     }
 }
 

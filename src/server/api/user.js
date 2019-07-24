@@ -14,28 +14,29 @@ let UserModel = require('../model/user');
 module.exports = (app) => {
     app.post('/api/user/registration', function (req, res) {
         console.log('in user registration');
-        UserModel
-            .findOne({username: req.body.username})
+        UserModel.findOne({username: req.body.username})
             .then(doc => {
-                console.log('req=' + req);
                 if (doc != null) {
                     console.log('user found=', req.body.username);
-                    // TODO: Send error message
-                    res.json({success: false, error: 'User already exists'});
+                    res.json({success: false, error: `User ${req.body.username} already exists`});
                 } else {
+                    let {username, location} = req.body;
                     console.log('new user=', req.body.username);
-                    // TODO: Add user to DB
-                    // new Buffer(req.body.photo.photo, 'base64');
-                    /*
-                    EXAMPLE:
-
-                    var a = new A;
-                    a.img.data = fs.readFileSync(imgPath);
-                    a.img.contentType = 'image/png';
-                    a.save(function (err, a) {
-                        if (err) throw err;
-                        */
-                    res.json({success: true});
+                    let newUser = new UserModel({
+                        username,
+                        location,
+                        photo: {
+                            data: new Buffer(req.body.photo.photo, 'base64'),
+                            contentType: req.body.photo.contentType
+                        },
+                    });
+                    newUser.save(function (err, newUser) {
+                        if (err) {
+                            res.json({success: false, error: err})
+                        } else {
+                            res.json({success: true});
+                        }
+                    });
                 }
             })
     });
