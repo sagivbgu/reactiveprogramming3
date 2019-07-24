@@ -3,7 +3,8 @@ const {List, Map} = require('immutable');
 export default {
     registration: Map({
         usernameUnique: false,
-        location: ''
+        location: '',
+        error: ''
     }),
     gallery: Map({
         images: List(),

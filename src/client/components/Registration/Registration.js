@@ -56,7 +56,9 @@ class Registration extends React.Component {
                            value={this.state.username}
                            onChange={this.handleChangeUsername}
                     />
-                    <span className='error-message'> {this.state.username && !this.props.usernameUnique && 'Username already exists!'} </span>
+                    <span className='error-message'>
+                        {this.state.username && !this.props.usernameUnique && 'Username already exists!'}
+                    </span>
                 </label>
                 <label>
                     <div>
