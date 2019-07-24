@@ -1,6 +1,7 @@
 import {RegistrationActionsConstants} from './constants'
 import {call, put, takeLatest, all} from 'redux-saga/effects'
 import Actions from './actions'
+import {getBase64} from '../../utils'
 
 const VALIDATE_USERNAME_UNIQUE_URL = 'api/user/exists';
 const REGISTER_USER_URL = '/api/user/registration';
@@ -16,16 +17,6 @@ function* validateUsernameUnique(action) {
     } catch (e) {
         yield put(Actions.validateUsernameUniqueFailureAction(e.message));
     }
-}
-
-// TODO: To utils
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
 }
 
 function* registerUser(action) {
