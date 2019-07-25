@@ -18,10 +18,6 @@ function* fetchAllRestaurants(action) {
     }
 }
 
-// TODO: 3 - create new saga.js file
-// TODO: 4 - Action and reducer
-// TODO: 5 - client & server connection
-
 function* RestaurantsSaga() {
     console.log('inside RegistrationSaga');
     yield all([
