@@ -1,12 +1,16 @@
 import initialState from '../../initialState';
 import {RegistrationActionsConstants} from './constants.js';
-import {List} from 'immutable';
 
 const RegistrationReducer = (state = initialState.registration, action) => {
     switch (action.type) {
+        case RegistrationActionsConstants.SET_USERNAME:
+            let username = action.payload;
+            return state.set('username', username);
+        case RegistrationActionsConstants.LOGIN_REQUEST_FAILURE:
+            return state.set('error', action.payload);
         case RegistrationActionsConstants.VALIDATE_USERNAME_UNIQUE_SUCCESS:
-            console.log('setting usernameUnique to ' + action.payload.isUnique);
-            return state.set('usernameUnique', action.payload.isUnique);
+            console.log('setting usernameUnique to ' + action.payload);
+            return state.set('usernameUnique', action.payload);
         case RegistrationActionsConstants.VALIDATE_USERNAME_UNIQUE_FAILURE:
             return state.set('usernameUnique', undefined).set('error', action.payload);
         case RegistrationActionsConstants.LOCATION_CHANGED:
@@ -15,6 +19,8 @@ const RegistrationReducer = (state = initialState.registration, action) => {
         case RegistrationActionsConstants.REGISTER_USER_FAILURE:
             console.log('Inside register user failure reducer');
             return state.set('error', action.payload);
+        case RegistrationActionsConstants.CLEAR_ERROR:
+            return state.set('error', '');
         default:
             return state;
     }

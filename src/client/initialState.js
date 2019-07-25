@@ -1,21 +1,16 @@
 const {List, Map} = require('immutable');
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export default {
     registration: Map({
-        usernameUnique: false,
+        username: '',
+        usernameUnique: undefined,
         location: '',
         error: ''
     }),
-    gallery: Map({
-        images: List(),
-        openLightBox: false,
-        activeImage: 0,
-        activeFilter: List(),
-        galleryWidth: 0
-    }),
     app: Map({
-        size: 200,
-        tag: 'art',
-        tags: List()
+        loggedUser: cookies.get('loggedUser') || undefined
     })
 };
