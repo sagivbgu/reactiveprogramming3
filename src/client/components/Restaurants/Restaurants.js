@@ -25,33 +25,10 @@ class Restaurants extends React.Component {
     }
 
     render() {
-        const IMAGES = [
-            {
-                src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-                thumbnail: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_n.jpg",
-                thumbnailWidth: 320,
-                thumbnailHeight: 212,
-                thumbnailCaption: "yoyo"
-            },
-
-            {
-                src: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_b.jpg",
-                thumbnail: "https://c4.staticflickr.com/9/8887/28897124891_98c4fdd82b_n.jpg",
-                thumbnailWidth: 320,
-                thumbnailHeight: 212,
-                myVal: "dsfsd"
-            },
-        ]
-
         return (
-            <div style={{
-                display: "block",
-                minHeight: "1px",
-                width: "100%",
-                border: "1px solid #ddd",
-                overflow: "auto"
-            }}>
-                <Gallery images={IMAGES}
+            <div>
+                <h1>Restaurants</h1>
+                <Gallery images={this.props.restaurants}
                          enableImageSelection={false}
                          margin={50}
                          onClickThumbnail={this.onClickThumbnail}
@@ -61,8 +38,11 @@ class Restaurants extends React.Component {
     }
 }
 
+// TODO: 2
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        restaurants: state.restaurants.get('restaurants').toArray()
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

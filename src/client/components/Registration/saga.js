@@ -57,6 +57,10 @@ function* registerUserSaga() {
     yield takeLatest(RegistrationActionsConstants.REGISTER_USER, registerUser);
 }
 
+// TODO: 3 - create new saga.js file
+// TODO: 4 - Action and reducer
+// TODO: 5 - client & server connection
+
 function* RegistrationSaga() {
     console.log('inside RegistrationSaga');
     yield all([
