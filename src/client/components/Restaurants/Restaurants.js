@@ -21,9 +21,7 @@ class Restaurants extends React.Component {
     }
 
     onClickThumbnail(index, event) {
-        console.log(index)
-        console.log(event)
-        history.push('/1')
+        history.push('/restaurants/' + index)
     }
 
     render() {

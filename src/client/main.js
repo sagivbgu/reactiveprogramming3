@@ -14,6 +14,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Registration from "./components/Registration";
 import Restaurants from "./components/Restaurants/Restaurants";
+import Restaurant from "./components/Restaurant/Restaurant";
 
 //create saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -34,6 +35,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Route exact path="/" component={App} />
+            <Route exact path="/restaurants/:rest_id" component={Restaurant} />
         </Router>
     </Provider>,
     document.getElementById("app")
