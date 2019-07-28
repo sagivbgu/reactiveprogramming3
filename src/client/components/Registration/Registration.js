@@ -1,17 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import ReactDropzone from "react-dropzone";
 
 import './registration.scss';
 import actions from './actions';
 import LocationAutoSuggestion from "./LocationAutoSuggestion";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import PhotoDropzone from "./PhotoDropzone";
 
 class Registration extends React.Component {
     constructor(props) {
         super(props);
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
-        this.onDrop = this.onDrop.bind(this);
+        this.onPhoto = this.onPhoto.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {photo: null};
@@ -27,10 +27,8 @@ class Registration extends React.Component {
         this.props.validateUsernameUnique(username);
     }
 
-    onDrop(files) {
-        console.log(files);
-        console.log(files[0]);
-        this.setState({photo: files[0]});
+    onPhoto(photo) {
+        this.setState({photo: photo});
     }
 
     handleSubmit(event) {
@@ -46,7 +44,6 @@ class Registration extends React.Component {
             console.log('photo: ' + JSON.stringify(photo));
             console.log('unique: ' + usernameUnique);
             this.props.register(username, location, photo);
-            this.props.history.push('/home');
         } else {
             console.log('Not submitting. Username is not unique.')
         }
@@ -55,6 +52,7 @@ class Registration extends React.Component {
     render() {
         return (
             <div>
+                {this.props.loggedUser && <Redirect to="/home"/>}
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Username:
@@ -68,23 +66,8 @@ class Registration extends React.Component {
                     </span>
                     </label>
                     <label>
-                        <div>
-                            Photo:
-                        </div>
-                        <div id='registration-dropzone'>
-                            <ReactDropzone
-                                onDrop={this.onDrop}
-                                accept="image/png, image/jpeg, image/jpg, image/gif"
-                                multiple={false}
-                            >
-                                {({getRootProps, getInputProps}) => (
-                                    <div {...getRootProps()}>
-                                        <input {...getInputProps()} />
-                                        {this.state.photo ? this.state.photo.path : 'Click or drag to upload a photo'}
-                                    </div>
-                                )}
-                            </ReactDropzone>
-                        </div>
+                        <div> Photo: </div>
+                        <PhotoDropzone onPhoto={this.onPhoto}/>
                     </label>
                     <label>
                         Location:
@@ -101,6 +84,7 @@ class Registration extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        loggedUser: state['app'].get('loggedUser'),
         username: state['registration'].get('username'),
         usernameUnique: state['registration'].get('usernameUnique'),
         location: state['registration'].get('location'),

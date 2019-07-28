@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {connect} from 'react-redux';
 import './login.scss';
 import actions from './actions';
@@ -24,12 +24,13 @@ class Login extends React.Component {
         console.log('Submitting');
         console.log(this.props.username);
         this.props.login(this.props.username);
-        this.props.history.push('/home/');
     }
 
     render() {
         return (
             <div>
+                {this.props.loggedUser && <Redirect to="/home"/>}
+
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Username:
@@ -51,6 +52,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        loggedUser: state['app'].get('loggedUser'),
         username: state['registration'].get('username'),
         error: state['registration'].get('error')
     }
