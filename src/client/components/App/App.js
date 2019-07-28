@@ -7,6 +7,7 @@ import {Button} from 'primereact/button';
 import {Dropdown} from 'primereact/dropdown';
 import Restaurants from "../Restaurants/Restaurants";
 import Registration from "../Registration/Registration";
+import Reviews from "../Restaurant/Reviews";
 
 class App extends React.Component {
     componentDidMount() {
