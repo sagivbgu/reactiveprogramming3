@@ -7,8 +7,15 @@ function loginAction(username) {
     }
 }
 
+function logoutAction(username) {
+    return {
+        type: AppActionsConstants.LOGOUT
+    }
+}
+
 let AppActions = {
-    loginAction
+    loginAction,
+    logoutAction
 };
 
 export default AppActions

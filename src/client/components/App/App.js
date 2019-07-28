@@ -1,28 +1,22 @@
 import React from 'react';
 import './App.scss';
-import { connect } from 'react-redux';
-import AppActions from './actions';
-import Login from "../Registration/Login";
+import {connect} from 'react-redux';
+import {Redirect} from "react-router-dom";
 
 class App extends React.Component {
-  render() {
-    return (
-      <div>
-          <Login/>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                {this.props.loggedUser ? <Redirect to="/home"/> : <Redirect to="/login"/>}
+            </div>
+        );
+    }
 }
 
-// TODO: Change mapXXXToProps
 const mapStateToProps = (state) => {
-  return {
-  }
+    return {
+        loggedUser: state['app'].get('loggedUser')
+    }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

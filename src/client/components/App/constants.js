@@ -1,5 +1,6 @@
 const AppActionsConstants = {
-    LOGIN: 'LOGIN'
+    LOGIN: 'LOGIN',
+    LOGOUT: 'LOGOUT'
 };
 
 export { AppActionsConstants}

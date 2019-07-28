@@ -15,6 +15,10 @@ const AppReducer = (state = initialState.app, action) => {
             console.log('Logging in user ' + usernameToLogin);
             cookies.set('loggedUser', usernameToLogin, {path: '/'});
             return state.set('loggedUser', usernameToLogin);
+        case AppActionsConstants.LOGOUT:
+            console.log('Logging out');
+            cookies.remove('loggedUser');
+            return state.set('loggedUser', undefined);
         default: //otherwise state is lost!
             return state;
     }

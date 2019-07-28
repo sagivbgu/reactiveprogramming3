@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import './login.scss';
 import actions from './actions';
@@ -24,6 +24,7 @@ class Login extends React.Component {
         console.log('Submitting');
         console.log(this.props.username);
         this.props.login(this.props.username);
+        this.props.history.push('/home/');
     }
 
     render() {
@@ -42,6 +43,7 @@ class Login extends React.Component {
                 </form>
                 <div className="error-message"> {this.props.error} </div>
                 <Link to="/registration/">Sign up</Link>
+
             </div>
         );
     }

@@ -45,7 +45,8 @@ class Registration extends React.Component {
             console.log(location);
             console.log('photo: ' + JSON.stringify(photo));
             console.log('unique: ' + usernameUnique);
-            this.props.register(username, location, photo)
+            this.props.register(username, location, photo);
+            this.props.history.push('/home');
         } else {
             console.log('Not submitting. Username is not unique.')
         }
