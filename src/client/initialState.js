@@ -10,6 +10,9 @@ export default {
         location: '',
         error: ''
     }),
+    restaurants: Map({
+        restaurants: List()
+    }),
     app: Map({
         loggedUser: cookies.get('loggedUser') || undefined
     })
