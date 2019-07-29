@@ -2,6 +2,8 @@ import React from "react";
 import {connect} from 'react-redux';
 import Gallery from 'react-grid-gallery';
 import history from '../../history'
+import Reviews from "./Reviews";
+import Restaurants from "../Restaurants/Restaurants";
 
 const divStyle = {
     margin: "auto",
@@ -21,7 +23,9 @@ class Restaurant extends React.Component {
         const restaurant = this.props.restaurants[this.props.match.params.rest_id]
 
         return (
-            <p>Welcome to {restaurant.name}, {restaurant.location}</p>
+            <div>
+                <Reviews name={restaurant.name} location={restaurant.location}/>
+            </div>
         );
     }
 }

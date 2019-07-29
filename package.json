@@ -100,6 +100,7 @@
     "react-fontawesome": "^1.6.1",
     "react-modal-image": "^2.3.2",
     "react-redux": "^7.0.3",
+    "react-rating": "^1.7.2",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
     "universal-cookie": "^4.0.2",
