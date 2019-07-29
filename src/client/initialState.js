@@ -20,5 +20,7 @@ export default {
             data: '',
             contentType: ''
         })
+    restaurants: Map({
+        restaurants: List()
     })
 };
