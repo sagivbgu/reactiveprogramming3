@@ -1,43 +1,21 @@
-import { AppActionsConstants} from './constants.js';
+import {AppActionsConstants} from './constants.js';
 
-
-function updateTagAction(tag) {
-  return {
-    type: AppActionsConstants.UPDATE_TAG,
-    payload: {
-      tag
-    }
-  }
-}
-
-function loadTagsAction(){
+function loginAction(username) {
     return {
-        type: AppActionsConstants.LOAD_TAGS,
-        uri: '/api/load/tags'
+        type: AppActionsConstants.LOGIN,
+        payload: username
     }
 }
 
-function loadTagsSuccessAction(tags){
+function logoutAction(username) {
     return {
-        type: AppActionsConstants.LOAD_TAGS_SUCCESS,
-        payload: {
-            tags: tags
-        }
+        type: AppActionsConstants.LOGOUT
     }
 }
 
-function loadTagsFailureAction(error){
-    return {
-        type: AppActionsConstants.LOAD_TAGS_FAILURE,
-        error: error
-    }
-}
-
-let AppActions  = {
-    updateTagAction,
-    loadTagsAction,
-    loadTagsSuccessAction,
-    loadTagsFailureAction
+let AppActions = {
+    loginAction,
+    logoutAction
 };
 
 export default AppActions

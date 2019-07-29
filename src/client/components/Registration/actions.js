@@ -1,21 +1,37 @@
 import {RegistrationActionsConstants} from './constants';
 
-function validateUsernameUniqueAction(username) {
+function setUsernameAction(username) {
     return {
-        type: RegistrationActionsConstants.VALIDATE_USERNAME_UNIQUE,
-        payload: {
-            username
-        }
+        type: RegistrationActionsConstants.SET_USERNAME,
+        payload: username
     }
 }
 
-function validateUsernameUniqueSuccessAction(username, isUnique) {
+function loginRequestAction(username) {
+    return {
+        type: RegistrationActionsConstants.LOGIN_REQUEST,
+        payload: username
+    }
+}
+
+function loginRequestFailureAction(failureMessage) {
+    return {
+        type: RegistrationActionsConstants.LOGIN_REQUEST_FAILURE,
+        payload: failureMessage
+    }
+}
+
+function validateUsernameUniqueAction(username) {
+    return {
+        type: RegistrationActionsConstants.VALIDATE_USERNAME_UNIQUE,
+        payload: username
+    }
+}
+
+function validateUsernameUniqueSuccessAction(isUnique) {
     return {
         type: RegistrationActionsConstants.VALIDATE_USERNAME_UNIQUE_SUCCESS,
-        payload: {
-            username,
-            isUnique
-        }
+        payload: isUnique
     }
 }
 
@@ -51,13 +67,23 @@ function registerUserFailureAction(errorMessage) {
     }
 }
 
+function clearErrorAction() {
+    return {
+        type: RegistrationActionsConstants.CLEAR_ERROR,
+    }
+}
+
 let actions = {
+    setUsernameAction,
+    loginRequestAction,
+    loginRequestFailureAction,
     validateUsernameUniqueAction,
     validateUsernameUniqueSuccessAction,
     validateUsernameUniqueFailureAction,
     locationChangedAction,
     registerUserAction,
-    registerUserFailureAction
+    registerUserFailureAction,
+    clearErrorAction
 };
 
 export default actions

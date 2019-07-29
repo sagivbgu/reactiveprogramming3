@@ -1,47 +1,22 @@
 import React from 'react';
 import './App.scss';
 import {connect} from 'react-redux';
-import AppActions from './actions';
-import GalleryActions from '../Gallery/actions';
-import {Button} from 'primereact/button';
-import {Dropdown} from 'primereact/dropdown';
-import Restaurants from "../Restaurants/Restaurants";
-import Registration from "../Registration/Registration";
+import {Redirect} from "react-router-dom";
 
 class App extends React.Component {
-    componentDidMount() {
-        //this.props.loadTagsEventHandler();
-    }
-
     render() {
         return (
             <div>
-                <Restaurants/>
+                {this.props.loggedUser ? <Redirect to="/home"/> : <Redirect to="/login"/>}
             </div>
         );
     }
 }
 
-
 const mapStateToProps = (state) => {
     return {
-        tag: state['app'].get('tag'),
-        tags: state['app'].get('tags').toArray()
+        loggedUser: state['app'].get('loggedUser')
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        loadTagsEventHandler: () => {
-            dispatch(AppActions.loadTagsAction());
-        },
-        updateTagEventHandler: (e) => {
-            dispatch(AppActions.updateTagAction(e.value));
-        },
-        loadImagesEventHandler: (tag) => {
-            dispatch(GalleryActions.loadImagesAction(tag))
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

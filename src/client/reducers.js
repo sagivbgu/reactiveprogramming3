@@ -9,6 +9,5 @@ import RestaurantsReducer from "./components/Restaurants/reducer";
 export default combineReducers({
   registration: RegistrationReducer,
   restaurants: RestaurantsReducer,
-  app: AppReducer,
-  gallery: GalleryReducer
+  app: AppReducer
 });

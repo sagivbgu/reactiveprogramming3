@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route } from 'react-router-dom'
-import App from './components/App/index';
-import history from './history'
+import {Route, BrowserRouter} from "react-router-dom";
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
 import createSagaMiddleware from 'redux-saga';
 import Sagas from './sagas';
-//import theme - change nova-light to other theme as needed
-import 'primereact/resources/themes/nova-light/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
 import Registration from "./components/Registration";
-import Restaurants from "./components/Restaurants/Restaurants";
+import Login from "./components/Registration/Login";
+import App from "./components/App/App";
+import HomePage from "./components/HomePage/HomePage";
 import Restaurant from "./components/Restaurant/Restaurant";
 
 //create saga middleware
@@ -29,15 +25,14 @@ const store = createStore(
 sagaMiddleware.run(Sagas);
 
 // Render the main component into the dom
-
-// TODO: Change
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history}>
-            <Route exact path="/" component={App} />
+        <BrowserRouter>
+            <Route path="/" exact component={App}/>
+            <Route path="/login/" component={Login}/>
+            <Route path="/registration/" component={Registration}/>
+            <Route path="/home/" component={HomePage}/>
             <Route exact path="/restaurants/:rest_id" component={Restaurant} />
-        </Router>
+        </BrowserRouter>
     </Provider>,
-    document.getElementById("app")
-);
-
+    document.getElementById('app'));

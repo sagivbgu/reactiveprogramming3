@@ -45,11 +45,7 @@ module.exports = (app) => {
         let username = req.query.username;
         UserModel.findOne({username: username})
             .then(doc => {
-                if (doc != null) {
-                    res.json({username: username, isUnique: false});
-                } else {
-                    res.json({username: username, isUnique: true});
-                }
+                res.json({username: username, exists: doc != null});
             });
     });
 };

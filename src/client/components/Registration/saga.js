@@ -1,19 +1,23 @@
 import {RegistrationActionsConstants} from './constants'
 import {call, put, takeLatest, all} from 'redux-saga/effects'
 import Actions from './actions'
+import AppActions from '../App/actions'
 import {getBase64} from '../../utils'
 
-const VALIDATE_USERNAME_UNIQUE_URL = 'api/user/exists';
+const VALIDATE_USERNAME_UNIQUE_URL = '/api/user/exists';
 const REGISTER_USER_URL = '/api/user/registration';
 
+async function doesUserExist(username) {
+    const param = '?username=' + encodeURIComponent(username);
+    const res = await fetch(VALIDATE_USERNAME_UNIQUE_URL + param);
+    const json = await res.json();
+    return json.exists
+}
+
 function* validateUsernameUnique(action) {
-    console.log('inside validateUsernameUnique Saga. Action=', action);
     try {
-        const param = '?username=' + encodeURIComponent(action.payload.username);
-        const res = yield call(fetch, VALIDATE_USERNAME_UNIQUE_URL + param);
-        const json = yield call([res, 'json']); //retrieve body of response
-        console.log('validateUsernameUnique json = ' + JSON.stringify(json));
-        yield put(Actions.validateUsernameUniqueSuccessAction(json.username, json.isUnique));
+        const userExists = yield call(doesUserExist, action.payload);
+        yield put(Actions.validateUsernameUniqueSuccessAction(!userExists));
     } catch (e) {
         yield put(Actions.validateUsernameUniqueFailureAction(e.message));
     }
@@ -42,9 +46,27 @@ function* registerUser(action) {
 
         const json = yield call([res, 'json']); //retrieve body of response
 
-        yield put(Actions.registerUserSuccessAction(json)); // TODO, and on failure create FailureAction
+        if (json.success) {
+            yield put(AppActions.loginAction(username));
+        } else {
+            yield put(Actions.registerUserFailureAction(json.error));
+        }
     } catch (e) {
         yield put(Actions.registerUserFailureAction(e.message));
+    }
+}
+
+function* loginRequest(action) {
+    let username = action.payload;
+    try {
+        const userExists = yield call(doesUserExist, username);
+        if (userExists) {
+            yield put(AppActions.loginAction(username));
+        } else {
+            yield put(Actions.loginRequestFailureAction(`${username} does not exist`));
+        }
+    } catch (e) {
+        yield put(Actions.loginRequestFailureAction(e.message));
     }
 }
 
@@ -57,15 +79,17 @@ function* registerUserSaga() {
     yield takeLatest(RegistrationActionsConstants.REGISTER_USER, registerUser);
 }
 
-// TODO: 3 - create new saga.js file
-// TODO: 4 - Action and reducer
-// TODO: 5 - client & server connection
+function* loginRequestSaga() {
+    console.log('inside login request saga');
+    yield takeLatest(RegistrationActionsConstants.LOGIN_REQUEST, loginRequest);
+}
 
 function* RegistrationSaga() {
     console.log('inside RegistrationSaga');
     yield all([
         validateUsernameUniqueSaga(),
-        registerUserSaga()
+        registerUserSaga(),
+        loginRequestSaga()
     ]);
 }
 
