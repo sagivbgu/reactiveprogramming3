@@ -4,13 +4,21 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export default {
+    app: Map({
+        loggedUser: cookies.get('loggedUser') || undefined
+    }),
     registration: Map({
         username: '',
         usernameUnique: undefined,
         location: '',
         error: ''
     }),
-    app: Map({
-        loggedUser: cookies.get('loggedUser') || undefined
+    profile: Map({
+        username: '',
+        location: '',
+        photo: Map({
+            data: '',
+            contentType: ''
+        })
     })
 };

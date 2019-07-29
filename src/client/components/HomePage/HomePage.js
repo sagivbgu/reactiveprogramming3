@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import AppActions from "../App/actions";
+import Profile from "../Profile/Profile";
 
 
 class HomePage extends React.Component {
@@ -18,7 +19,7 @@ class HomePage extends React.Component {
         return (
             <div>
                 <h3> Home page </h3>
-
+                <Profile/>
                 {this.props.loggedUser && <button onClick={this.onLogoutClicked}> Logout </button>}
             </div>
         );
