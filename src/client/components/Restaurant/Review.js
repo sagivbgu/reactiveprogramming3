@@ -5,7 +5,7 @@ import yellowstar from "./assets/images/star-yellow.png"
 
 class Review extends Component {
     render() {
-        let c = {"Bathroom Quality": 1, "Staff Kindness": 4, "Cleanliness": 1}
+        let c = {"Bathroom Quality": 1, "Staff Kindness": 4, "Cleanliness": 1};
 
 
         return (
