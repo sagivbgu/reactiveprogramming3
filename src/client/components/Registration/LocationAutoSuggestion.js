@@ -23,8 +23,8 @@ const renderSuggestion = suggestion => (
 );
 
 class LocationAutoSuggestion extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // Autosuggest is a controlled component.
         // This means that you need to provide an input value
@@ -37,8 +37,14 @@ class LocationAutoSuggestion extends React.Component {
         };
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.location !== this.state.location) {
+            this.setState({location: this.props.location})
+        }
+    }
+
     onChange = (event, {newValue}) => {
-        this.props.changeLocation(newValue);
+        this.state.location = newValue;
         this.props.onLocation(newValue);
     };
 
@@ -57,12 +63,12 @@ class LocationAutoSuggestion extends React.Component {
     };
 
     render() {
-        const {suggestions, value} = this.state;
+        const {suggestions, location} = this.state;
 
         // Autosuggest will pass through all these props to the input.
         const inputProps = {
             placeholder: 'Start typing',
-            value,
+            value: location,
             onChange: this.onChange,
             disabled: this.props.disabled
         };

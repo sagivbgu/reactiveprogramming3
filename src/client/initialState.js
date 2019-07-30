@@ -14,6 +14,7 @@ export default {
         error: ''
     }),
     profile: Map({
+        username: '',
         location: '',
         photo: Map({
             data: '',

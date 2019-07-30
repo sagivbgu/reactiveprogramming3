@@ -19,7 +19,7 @@ class HomePage extends React.Component {
         return (
             <div>
                 <h3> Home page </h3>
-                <Profile/>
+                <Profile user={this.props.loggedUser}/>
                 {this.props.loggedUser && <button onClick={this.onLogoutClicked}> Logout </button>}
             </div>
         );
