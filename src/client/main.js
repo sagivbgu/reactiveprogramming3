@@ -11,6 +11,7 @@ import Login from "./components/Registration/Login";
 import App from "./components/App/App";
 import HomePage from "./components/HomePage/HomePage";
 import Restaurant from "./components/Restaurant/Restaurant";
+import Restaurants from "./components/Restaurants/Restaurants";
 
 //create saga middleware
 const sagaMiddleware = createSagaMiddleware();

@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
 import Gallery from 'react-grid-gallery';
-import history from '../../history'
 
 const divStyle = {
     margin: "auto",
@@ -21,7 +20,7 @@ class Restaurants extends React.Component {
     }
 
     onClickThumbnail(index, event) {
-        history.push('/restaurants/' + index)
+        this.props.history.push('/restaurants/' + index)
     }
 
     render() {

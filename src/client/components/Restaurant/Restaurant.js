@@ -1,9 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
-import Gallery from 'react-grid-gallery';
-import history from '../../history'
 import Reviews from "./Reviews";
-import Restaurants from "../Restaurants/Restaurants";
+
 
 const divStyle = {
     margin: "auto",
