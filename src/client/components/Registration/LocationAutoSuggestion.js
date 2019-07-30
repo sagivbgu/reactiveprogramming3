@@ -32,12 +32,14 @@ class LocationAutoSuggestion extends React.Component {
         // Suggestions also need to be provided to the Autosuggest,
         // and they are initially empty because the Autosuggest is closed.
         this.state = {
-            suggestions: []
+            suggestions: [],
+            location: this.props.location || ''
         };
     }
 
     onChange = (event, {newValue}) => {
         this.props.changeLocation(newValue);
+        this.props.onLocation(newValue);
     };
 
     // Autosuggest will call this function every time you need to update suggestions.
@@ -55,14 +57,14 @@ class LocationAutoSuggestion extends React.Component {
     };
 
     render() {
-        const {suggestions} = this.state;
-        const value = this.props.location;
+        const {suggestions, value} = this.state;
 
         // Autosuggest will pass through all these props to the input.
         const inputProps = {
             placeholder: 'Start typing',
             value,
-            onChange: this.onChange
+            onChange: this.onChange,
+            disabled: this.props.disabled
         };
 
         return (
@@ -78,19 +80,5 @@ class LocationAutoSuggestion extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        location: state['registration'].get('location')
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changeLocation: (location) => {
-            dispatch(actions.locationChangedAction(location));
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LocationAutoSuggestion);
+export default LocationAutoSuggestion;
 

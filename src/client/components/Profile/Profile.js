@@ -2,8 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from "react-router-dom";
 
-import './registration.scss';
-import actions from './actions';
+import actions from "./actions";
 import LocationAutoSuggestion from "../Registration/LocationAutoSuggestion";
 import PhotoDropzone from "../Registration/PhotoDropzone";
 
@@ -12,40 +11,42 @@ class Profile extends React.Component {
         super(props);
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
         this.onPhoto = this.onPhoto.bind(this);
+        this.onLocation = this.onLocation.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.state = {photo: null};
+        this.state = {
+            username: this.props.username,
+            newLocation: '',
+            newPhoto: null,
+            // TODO: newReviews
+        };
     }
 
     handleChangeUsername(event) {
         let username = event.target.value;
-        this.props.setUsername(username);
-        this.props.validateUsernameUnique(username);
+        this.setState({'username': username});
     }
 
     onPhoto(photo) {
-        this.setState({photo: photo});
+        this.setState({newPhoto: photo});
     }
 
+    onLocation(location) {
+        this.setState({newLocation: location});
+    }
+
+    // TODO
     handleSubmit(event) {
         event.preventDefault();
-        let {username, usernameUnique, location} = this.props;
-        let {photo} = this.state;
+        let {username, location} = this.props;
+        let {newPhoto, newLocation} = this.state;
 
-        console.log('Location: ' + location);
-        if (usernameUnique) {
-            console.log('Submitting');
-            console.log(username);
-            console.log(location);
-            console.log('photo: ' + JSON.stringify(photo));
-            console.log('unique: ' + usernameUnique);
-            this.props.register(username, location, photo);
-        } else {
-            console.log('Not submitting. Username is not unique.')
-        }
+        console.log('Submitting');
+        this.props.updateData(username, newLocation, newPhoto);
     }
 
     render() {
+        let editable = this.props.username === this.props.loggedUser;
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -55,52 +56,46 @@ class Profile extends React.Component {
                                name="username"
                                value={this.props.username}
                                onChange={this.handleChangeUsername}
-                               disabled={this.props.username !== this.props.loggedUser}
+                               disabled={!editable}
                         />
-                        <span className='error-message'>
-                        {this.props.username && this.props.usernameUnique === false && 'Username already exists!'}
-                    </span>
                     </label>
                     <label>
-                        <div> Photo: </div>
-                        <PhotoDropzone onPhoto={this.onPhoto}/>
+                        <div> Photo:</div>
+                        {editable && <div> New photo:
+                            <PhotoDropzone onPhoto={this.onPhoto}/>
+                        </div>}
                     </label>
                     <label>
                         Location:
-                        <LocationAutoSuggestion/>
+                        <LocationAutoSuggestion location={this.props.location} onLocation={this.onLocation}
+                                                disabled={!editable}/>
                     </label>
-                    <input type="submit" value="Submit"/>
-                    <div className="error-message"> {this.props.error} </div>
+                    <input type="submit" value="Submit" disabled={!editable}/>
                 </form>
-                <Link to="/login/">Back to login</Link>
+                <Link to="/home/">Back to home page</Link>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log('STATE: ', state);
     return {
         loggedUser: state['app'].get('loggedUser'),
-        username: state['profile'].get('username'),
         location: state['profile'].get('location'),
-        photo: state['profile'].get('photo')
+        photo: state['profile'].get('photo'),
+        reviews: state['profile'].get('reviews'),
+        error: state['profile'].get('error')
     }
 };
 
-// TODO
 const mapDispatchToProps = (dispatch) => {
     return {
-        setUsername: (username) => {
-            dispatch(actions.setUsernameAction(username));
-        },
-        register: (username, location, photo) => {
-            console.log('dispatching ' + JSON.stringify(actions.registerUserAction(username, location, photo)));
-            dispatch(actions.registerUserAction(username, location, photo));
-        },
-        clearError: () => {
-            dispatch(actions.clearErrorAction());
+        fetchProfile: (username) => {
+            dispatch(actions.fetchProfileRequestAction(username));
         }
-    }
+    };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

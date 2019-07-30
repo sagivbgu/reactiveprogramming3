@@ -14,12 +14,14 @@ export default {
         error: ''
     }),
     profile: Map({
-        username: '',
         location: '',
         photo: Map({
             data: '',
             contentType: ''
-        })
+        }),
+        reviews: [],
+        error: ''
+    }),
     restaurants: Map({
         restaurants: List()
     })

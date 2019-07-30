@@ -12,9 +12,13 @@ class Registration extends React.Component {
         super(props);
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
         this.onPhoto = this.onPhoto.bind(this);
+        this.onLocation = this.onLocation.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.state = {photo: null};
+        this.state = {
+            photo: null,
+            location: ''
+        };
     }
 
     componentDidMount() {
@@ -29,6 +33,10 @@ class Registration extends React.Component {
 
     onPhoto(photo) {
         this.setState({photo: photo});
+    }
+
+    onLocation(location) {
+        this.setState({location: location});
     }
 
     handleSubmit(event) {
@@ -66,12 +74,12 @@ class Registration extends React.Component {
                     </span>
                     </label>
                     <label>
-                        <div> Photo: </div>
+                        <div> Photo:</div>
                         <PhotoDropzone onPhoto={this.onPhoto}/>
                     </label>
                     <label>
                         Location:
-                        <LocationAutoSuggestion/>
+                        <LocationAutoSuggestion onLocation={this.onLocation}/>
                     </label>
                     <input type="submit" value="Submit"/>
                     <div className="error-message"> {this.props.error} </div>

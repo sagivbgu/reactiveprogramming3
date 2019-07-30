@@ -42,13 +42,6 @@ function validateUsernameUniqueFailureAction(error) {
     }
 }
 
-function locationChangedAction(location) {
-    return {
-        type: RegistrationActionsConstants.LOCATION_CHANGED,
-        payload: location
-    }
-}
-
 function registerUserAction(username, location, photo) {
     return {
         type: RegistrationActionsConstants.REGISTER_USER,
@@ -80,7 +73,6 @@ let actions = {
     validateUsernameUniqueAction,
     validateUsernameUniqueSuccessAction,
     validateUsernameUniqueFailureAction,
-    locationChangedAction,
     registerUserAction,
     registerUserFailureAction,
     clearErrorAction

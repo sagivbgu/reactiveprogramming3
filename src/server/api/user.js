@@ -40,12 +40,23 @@ module.exports = (app) => {
                 }
             })
     });
+
     app.get('/api/user/exists', function (req, res) {
         console.log('inside /api/user/exists');
         let username = req.query.username;
         UserModel.findOne({username: username})
             .then(doc => {
                 res.json({username: username, exists: doc != null});
+            });
+    });
+
+    app.get('/api/user/profile', function (req, res) {
+        console.log('inside /api/user/profile');
+        let username = req.query.username;
+        UserModel.findOne({username: username})
+            .then(doc => {
+                console.log(doc);
+                doc == null ? res.json({error: `User ${req.body.username} doesn't exist`}) : res.json(doc);
             });
     });
 };
