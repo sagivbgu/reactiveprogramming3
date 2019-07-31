@@ -55,6 +55,8 @@ class Profile extends React.Component {
     // TODO: Show data fetched from the server, including reviews
     render() {
         let editable = this.props.username === this.props.loggedUser;
+        let photo = this.props.photo.get('data');
+        console.log('photo data: ', photo);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -69,7 +71,7 @@ class Profile extends React.Component {
                     <label>
                         <div> Photo:</div>
                         {/* TODO: DELETE this comment --->    <img src={`data:image/jpeg;base64,${data}`}/>*/}
-                        <img src={this.props.photo.get('photo')}/>
+                        <img src={photo}/>
                     </label>
 
                     <div hidden={!editable}>

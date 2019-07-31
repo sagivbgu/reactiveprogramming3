@@ -17,7 +17,7 @@ export default {
         username: '',
         location: '',
         photo: Map({
-            data: '',
+            data: null,
             contentType: ''
         }),
         reviews: [],

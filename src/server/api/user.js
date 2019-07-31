@@ -26,7 +26,7 @@ module.exports = (app) => {
                         username,
                         location,
                         photo: {
-                            data: new Buffer(req.body.photo.photo, 'base64'),
+                            data: new Buffer.from(req.body.photo.photo),
                             contentType: req.body.photo.contentType
                         },
                     });
@@ -55,8 +55,14 @@ module.exports = (app) => {
         let username = req.query.username;
         UserModel.findOne({username: username})
             .then(doc => {
-                console.log(doc);
-                doc == null ? res.json({error: `User ${req.body.username} doesn't exist`}) : res.json(doc);
+                doc == null ? res.json({error: `User ${req.body.username} doesn't exist`}) : res.json({
+                    username: doc.username,
+                    location: doc.location,
+                    photo: {
+                        data: doc.photo.data.toString('base64'),
+                        contentType: doc.photo.contentType
+                    }
+                });
             });
     });
 };
