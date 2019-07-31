@@ -70,8 +70,7 @@ class Profile extends React.Component {
                     </label>
                     <label>
                         <div> Photo:</div>
-                        {/* TODO: DELETE this comment --->    <img src={`data:image/jpeg;base64,${data}`}/>*/}
-                        <img src={photo}/>
+                        <img src={photo} width={400} height={400}/>
                     </label>
 
                     <div hidden={!editable}>
