@@ -33,14 +33,8 @@ class LocationAutoSuggestion extends React.Component {
         // and they are initially empty because the Autosuggest is closed.
         this.state = {
             suggestions: [],
-            location: this.props.location || ''
+            location: ''
         };
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.location !== this.state.location) {
-            this.setState({location: this.props.location})
-        }
     }
 
     onChange = (event, {newValue}) => {

@@ -21,6 +21,7 @@ class Profile extends React.Component {
             newPhoto: null,
             // TODO: newReviews
         };
+        console.log('props on ctor: ', this.props);
     }
 
     componentDidMount() {
@@ -43,11 +44,12 @@ class Profile extends React.Component {
     // TODO
     handleSubmit(event) {
         event.preventDefault();
-        let {username, location} = this.props;
+        console.log(this.props);
+        /*let {username, location} = this.props;
         let {newPhoto, newLocation} = this.state;
 
         console.log('Submitting');
-        this.props.updateData(username, newLocation, newPhoto);
+        this.props.updateData(username, newLocation, newPhoto);*/
     }
 
     // TODO: Show data fetched from the server, including reviews
@@ -58,29 +60,43 @@ class Profile extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Username:
-                        <input type="text"
-                               name="username"
-                               value={this.props.username}
-                               onChange={this.handleChangeUsername}
-                               disabled={!editable}
-                        />
+                        <div> {this.props.username} </div>
+                    </label>
+                    <label>
+                        Location:
+                        <div> {this.props.location} </div>
                     </label>
                     <label>
                         <div> Photo:</div>
                         {/* TODO: DELETE this comment --->    <img src={`data:image/jpeg;base64,${data}`}/>*/}
                         <img src={this.props.photo.get('photo')}/>
                     </label>
-                    <label>
-                        {editable && <div> New photo:
-                            <PhotoDropzone onPhoto={this.onPhoto}/>
-                        </div>}
-                    </label>
-                    <label>
-                        Location:
-                        <LocationAutoSuggestion location={this.props.location} onLocation={this.onLocation}
-                                                disabled={!editable}/>
-                    </label>
-                    <input type="submit" value="Update" disabled={!editable}/>
+
+                    <div hidden={!editable}>
+                        <h2> Update profile </h2>
+
+                        <label>
+                            New username:
+                            <input type="text"
+                                   name="username"
+                                   value=""
+                                   onChange={this.handleChangeUsername}
+                                   disabled={!editable}
+                            />
+                        </label>
+                        <label>
+                            New Location:
+                            <LocationAutoSuggestion onLocation={this.onLocation}
+                                                    disabled={!editable}/>
+                        </label>
+                        <label>
+                            New photo:
+                            <div>
+                                <PhotoDropzone onPhoto={this.onPhoto}/>
+                            </div>
+                        </label>
+                        <input type="submit" value="Update"/>
+                    </div>
                 </form>
                 <div className="error-message"> {this.props.error} </div>
                 <Link to="/home/">Back to home page</Link>

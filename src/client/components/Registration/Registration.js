@@ -23,6 +23,7 @@ class Registration extends React.Component {
 
     componentDidMount() {
         this.props.clearError();
+        this.props.validateUsernameUnique(this.props.username);
     }
 
     handleChangeUsername(event) {
@@ -41,8 +42,8 @@ class Registration extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        let {username, usernameUnique, location} = this.props;
-        let {photo} = this.state;
+        let {username, usernameUnique} = this.props;
+        let {photo, location} = this.state;
 
         console.log('Location: ' + location);
         if (usernameUnique) {
