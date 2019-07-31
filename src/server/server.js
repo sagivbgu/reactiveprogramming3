@@ -23,6 +23,7 @@ if (process.env.NODE_ENV !== 'test') {
     }else console.log('connected to database!');
   });
 }
+mongoose.set('useFindAndModify', false);
 
 
 

@@ -14,7 +14,7 @@ class Form extends Component {
             isSubmitted: false,
             name: '',
             review: '',
-            ratingTopics: {
+            ratings: {
                 "Bathroom Quality": 0,
                 "Staff Kindness": 0,
                 "Cleanliness": 0,
@@ -27,11 +27,11 @@ class Form extends Component {
         };
 
         this.onChanges = {}
-        Object.keys(this.state.ratingTopics).forEach(key => {
+        Object.keys(this.state.ratings).forEach(key => {
             let onChange = value => {
                 this.setState(prevState => ({
-                    ratingTopics: {
-                        ...prevState.ratingTopics,
+                    ratings: {
+                        ...prevState.ratings,
                         [key]: value
                     }
                 }))
@@ -43,14 +43,12 @@ class Form extends Component {
     }
 
     render() {
-        console.log(this.state.ratingTopics)
         return (
             <div className="review-form bg-white content-padding block-margin-top">
 
                 <form className={this.state.isActive ? '' : 'hide'} onSubmit={this.props.submitForm}>
 
                     {this.props.validation}
-                    <input type="hidden" name="ratingTopics" value={this.state.ratingTopics}/>
 
                     <input type="text" value={this.state.name} name="name" placeholder="Name"
                            onChange={this.handleInputChange}/>
@@ -60,9 +58,9 @@ class Form extends Component {
 
                     <ul className="reviews__list">
                         {
-                            Object.keys(this.state.ratingTopics).map(key => {
+                            Object.keys(this.state.ratings).map(key => {
                                 return (
-                                    <li> {key}: <Rating initialRating={this.state.ratingTopics[key]}
+                                    <li> {key}: <Rating initialRating={this.state.ratings[key]}
                                                         emptySymbol={<img src={emptystar} className="icon"/>}
                                                         fullSymbol={<img src={yellowstar} className="icon"/>}
                                                         onChange={this.onChanges[key]}/>

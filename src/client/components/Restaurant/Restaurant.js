@@ -3,14 +3,6 @@ import {connect} from 'react-redux';
 import Reviews from "./Reviews";
 
 
-const divStyle = {
-    margin: "auto",
-    width: "80%",
-    border: "3px solid white",
-    padding: "10px",
-};
-
-
 class Restaurant extends React.Component {
     constructor(props) {
         super(props);
@@ -18,11 +10,13 @@ class Restaurant extends React.Component {
     }
 
     render() {
-        const restaurant = this.props.restaurants[this.props.match.params.rest_id]
+        const restaurant = this.props.restaurants[this.props.match.params.restaurantIndex]
 
         return (
             <div>
-                <Reviews name={restaurant.name} location={restaurant.location}/>
+                <p>Welcome to {restaurant.name}, {restaurant.location}</p>
+                <p>Reviews & Ratings:</p>
+                <Reviews restaurantId={restaurant._id}/>
             </div>
         );
     }
@@ -30,7 +24,7 @@ class Restaurant extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        restaurants: state.restaurants.get('restaurants').toArray()
+        restaurants: state.restaurants.toList().toArray()
     }
 };
 

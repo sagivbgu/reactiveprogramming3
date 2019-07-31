@@ -10,9 +10,19 @@ export default {
         location: '',
         error: ''
     }),
-    restaurants: Map({
-        restaurants: List()
-    }),
+
+    restaurants: Map(
+        // restaurantId: {
+        //     _id: '',
+        //     name: '',
+        //     location: '',
+        //     reviewsIds: List(),
+        //     thumbnailLink: '',
+        //     thumbnailWidth: 0,
+        //     thumbnailHeight: 0
+        // }
+     ),
+
     app: Map({
         loggedUser: cookies.get('loggedUser') || undefined
     })

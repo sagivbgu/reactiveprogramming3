@@ -33,7 +33,7 @@ ReactDOM.render(
             <Route path="/login/" component={Login}/>
             <Route path="/registration/" component={Registration}/>
             <Route path="/home/" component={HomePage}/>
-            <Route exact path="/restaurants/:rest_id" component={Restaurant} />
+            <Route exact path="/restaurants/:restaurantIndex" component={Restaurant} />
         </BrowserRouter>
     </Provider>,
     document.getElementById('app'));
