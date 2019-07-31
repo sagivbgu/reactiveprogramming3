@@ -21,10 +21,35 @@ function fetchProfileFailureAction(error) {
     }
 }
 
+function updateProfileRequestAction(username, profile) {
+    return {
+        type: ProfileActionsConstants.UPDATE_PROFILE_REQUEST,
+        username: username,
+        payload: profile
+    }
+}
+
+function updateProfileSuccessAction(profile) {
+    return {
+        type: ProfileActionsConstants.UPDATE_PROFILE_SUCCESS,
+        payload: profile
+    }
+}
+
+function updateProfileFailureAction(error) {
+    return {
+        type: ProfileActionsConstants.UPDATE_PROFILE_FAILURE,
+        payload: error
+    }
+}
+
 let actions = {
     fetchProfileRequestAction,
     fetchProfileFailureAction,
-    fetchProfileSuccessAction
+    fetchProfileSuccessAction,
+    updateProfileRequestAction,
+    updateProfileSuccessAction,
+    updateProfileFailureAction
 };
 
 export default actions

@@ -41,18 +41,18 @@ class Profile extends React.Component {
         this.setState({newLocation: location});
     }
 
-    // TODO
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.props);
-        /*let {username, location} = this.props;
-        let {newPhoto, newLocation} = this.state;
+        let {newUsername, newPhoto, newLocation} = this.state;
 
         console.log('Submitting');
-        this.props.updateData(username, newLocation, newPhoto);*/
+        this.props.updateProfile(this.props.username, {
+            username: newUsername,
+            location: newLocation,
+            photo: newPhoto
+        });
     }
 
-    // TODO: Show data fetched from the server, including reviews
     render() {
         let editable = this.props.username === this.props.loggedUser;
         let photo = this.props.photo.get('data');
@@ -122,6 +122,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchProfile: (username) => {
             dispatch(actions.fetchProfileRequestAction(username));
+        },
+        updateProfile: (user, newProfile) => {
+            dispatch(actions.updateProfileRequestAction(user, newProfile));
         }
     };
 };

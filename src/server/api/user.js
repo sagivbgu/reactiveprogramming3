@@ -65,4 +65,34 @@ module.exports = (app) => {
                 });
             });
     });
+
+    app.post('/api/user/profile/update', function (req, res) {
+        console.log('in user update profile');
+        UserModel.findOne({username: req.body.username})
+            .then(doc => {
+                const oldUsername = req.body.username;
+                if (doc == null) {
+                    console.log('user not found: ', oldUsername);
+                    res.json({error: `User ${oldUsername} does not exist`});
+                } else {
+                    console.log('updating user: ', oldUsername);
+                    let {username, location} = req.body.profile;
+                    let user = new UserModel({
+                        username,
+                        location,
+                        photo: {
+                            data: new Buffer.from(req.body.profile.photo.photo),
+                            contentType: req.body.profile.photo.contentType
+                        },
+                    });
+                    user.save(function (err, user) {
+                        if (err) {
+                            res.json({error: err})
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                }
+            })
+    });
 };
