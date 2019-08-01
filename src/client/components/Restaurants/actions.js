@@ -29,27 +29,11 @@ function addReviewResult(review) {
     }
 }
 
-function getRestaurantReviews(restaurantId) {
-    return {
-        type: RestaurantsActions.GET_RESTAURANT_REVIEWS,
-        payload: restaurantId
-    }
-}
-
-function getRestaurantReviewsResult(reviews) {
-    return {
-        type: RestaurantsActions.GET_RESTAURANT_REVIEWS_RESULT,
-        payload: reviews
-    }
-}
-
 let actions = {
     fetchAllRestaurantsResultAction,
     fetchAllRestaurantsRequest,
     addReview,
     addReviewResult,
-    getRestaurantReviews,
-    getRestaurantReviewsResult
 };
 
 export default actions

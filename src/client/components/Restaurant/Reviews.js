@@ -222,10 +222,6 @@ const mapDispatchToProps = (dispatch) => {
         addReview: review => {
             dispatch(actions.addReview(review));
         },
-
-        getRestaurantReviews: (restaurantId) => {
-            dispatch(actions.getRestaurantReviews(restaurantId))
-        }
     }
 };
 

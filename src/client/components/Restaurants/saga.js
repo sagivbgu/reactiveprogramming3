@@ -5,7 +5,6 @@ import {RestaurantsActions} from "../Restaurants/constants";
 
 const FETCH_ALL_RESTAURANTS = '/api/restaurants/fetchall'
 const ADD_REVIEW_URL = '/api/restaurant/addreview'
-const GET_RESTAURANT_REVIEWS_URL = '/api/restaurants/getrestaurantreviews'
 
 
 function* fetchAllRestaurantsRequest(action) {

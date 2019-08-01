@@ -25,11 +25,6 @@ const RestaurantsReducer = (state = initialState.restaurants, action) => {
             let review = action.payload;
             return state.updateIn([review.restaurantId, 'reviews'], reviews => reviews.unshift(review));
 
-        case RestaurantsActions.GET_RESTAURANT_REVIEWS_RESULT:
-            console.log('inside RestaurantReducer.GET_RESTAURANT_REVIEWS_RESULT', action.payload);
-            let reviews = action.payload;
-            return state.setIn([review.restaurantId, 'reviews'], List(reviews));
-
         default:
             return state;
     }
