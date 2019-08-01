@@ -5,22 +5,20 @@ import yellowstar from "./assets/images/star-yellow.png"
 
 class Review extends Component {
     render() {
-        let c = {"Bathroom Quality": 1, "Staff Kindness": 4, "Cleanliness": 1};
-
-
         return (
             <li key={this.props.index} className="reviews__list-item reset-list block-padding-vertical">
                 <div className="review area">
-                    <h3 className="review__title">{this.props.review.name}</h3>
+                    <h3 className="review__title">{this.props.review.reviewerUsername}</h3>
 
                     {this.getDate(this.props.review.date)}
                     <br/>
 
                     <ul className="reviews__list">
                         {
-                            Object.keys(c).map(key => {
+                            Object.keys(this.props.review.ratings).map((key, idx) => {
                                 return (
-                                    <li> {key}: <Rating initialRating={c[key]}
+                                    <li key={idx}> {key}: <Rating initialRating={this.props.review.ratings[key]}
+                                                        readonly={true}
                                                         emptySymbol={<img src={emptystar} className="icon"/>}
                                                         fullSymbol={<img src={yellowstar} className="icon"/>}/>
                                     </li>)
@@ -29,7 +27,7 @@ class Review extends Component {
                     </ul>
 
                     <div className="review__content">
-                        {this.props.review.review}
+                        {this.props.review.text}
                     </div>
 
                 </div>

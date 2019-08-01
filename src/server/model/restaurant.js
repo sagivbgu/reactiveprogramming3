@@ -4,10 +4,9 @@ let Schema = mongoose.Schema;
 let restaurantSchema = new Schema({
     name: String,
     location: String,
-    thumbnailLink: String,
+    thumbnail: String,
     thumbnailWidth: Number,
-    thumbnailHeight: Number,
-    // TODO: Reviews
+    thumbnailHeight: Number
 });
 
 module.exports = mongoose.model('RestaurantModel', restaurantSchema);

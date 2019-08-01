@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import AppActions from "../App/actions";
+import Restaurants from "../Restaurants/Restaurants";
 import Profile from "../Profile/Profile";
 import {Link} from "react-router-dom";
 
@@ -29,6 +30,7 @@ class HomePage extends React.Component {
                 <div>
                     {loggedUser && <button onClick={this.onLogoutClicked}> Logout </button>}
                 </div>
+                <Restaurants history={this.props.history}/>
             </div>
         );
     }

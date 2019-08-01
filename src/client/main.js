@@ -36,7 +36,7 @@ ReactDOM.render(
             <Route path="/registration/" component={Registration}/>
             <Route path="/user/search/" component={UserSearch}/>
             <Route path="/user/profile/:user" component={Profile}/>
-            <Route exact path="/restaurants/:rest_id" component={Restaurant} />
+            <Route exact path="/restaurants/:restaurantIndex" component={Restaurant} />
         </BrowserRouter>
     </Provider>,
     document.getElementById('app'));

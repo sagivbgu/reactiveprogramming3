@@ -27,7 +27,15 @@ export default {
         results: [],
         error: ''
     }),
-    restaurants: Map({
-        restaurants: List()
-    })
+    restaurants: Map(
+        // restaurantId: {
+        //     _id: '',
+        //     name: '',
+        //     location: '',
+        //     reviewsIds: List(),
+        //     thumbnailLink: '',
+        //     thumbnailWidth: 0,
+        //     thumbnailHeight: 0
+        // }
+    ),
 };

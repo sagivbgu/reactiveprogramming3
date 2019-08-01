@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
 import Gallery from 'react-grid-gallery';
-import history from '../../history'
+import actions from "../Restaurants/actions";
 
 const divStyle = {
     margin: "auto",
@@ -20,8 +20,12 @@ class Restaurants extends React.Component {
 
     }
 
+    componentWillMount() {
+        this.props.fetchAllRestaurants();
+    }
+
     onClickThumbnail(index, event) {
-        history.push('/restaurants/' + index)
+        this.props.history.push('/restaurants/' + index)
     }
 
     render() {
@@ -38,15 +42,18 @@ class Restaurants extends React.Component {
     }
 }
 
-// TODO: 2
 const mapStateToProps = (state) => {
     return {
-        restaurants: state.restaurants.get('restaurants').toArray()
+        restaurants: state.restaurants.toList().toArray()
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        fetchAllRestaurants: () => {
+            dispatch(actions.fetchAllRestaurantsRequest());
+        }
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurants);
