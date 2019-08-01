@@ -75,16 +75,23 @@ module.exports = (app) => {
                     console.log('user not found: ', oldUsername);
                     res.json({error: `User ${oldUsername} does not exist`});
                 } else {
-                    // TODO: Make sure newUser doesn't already exist
-                    console.log('updating user: ', oldUsername);
-                    doc.username = req.body.profile.username;
-                    doc.location = req.body.profile.location;
-                    doc.photo.data = new Buffer.from(req.body.profile.photo.photo);
-                    doc.photo.contentType = req.body.profile.photo.contentType;
+                    let newUsername = req.body.profile.username;
+                    UserModel.findOne({username: newUsername})
+                        .then(duplicatedUserDoc => {
+                            if (duplicatedUserDoc != null) {
+                                res.json({error: `User ${newUsername} already exists`});
+                            } else {
+                                console.log('updating user: ', oldUsername);
+                                doc.username = newUsername;
+                                doc.location = req.body.profile.location;
+                                doc.photo.data = new Buffer.from(req.body.profile.photo.photo);
+                                doc.photo.contentType = req.body.profile.photo.contentType;
 
-                    doc.save(function (err, doc) {
-                        err ? res.json({error: err}) : res.json(getJson(doc));
-                    });
+                                doc.save(function (err, doc) {
+                                    err ? res.json({error: err}) : res.json(getJson(doc));
+                                });
+                            }
+                        });
                 }
             })
     });
