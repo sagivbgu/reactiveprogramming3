@@ -11,6 +11,10 @@ class UserSearch extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
     }
 
+    componentWillUnmount() {
+        this.props.clearSearch();
+    }
+
     handleSearch(text) {
         console.log('Submitting');
         this.props.search(text);
@@ -23,13 +27,11 @@ class UserSearch extends React.Component {
                     placeholder="Search..."
                     onEnter={this.handleSearch}
                     onSearchClick={this.handleSearch}
-                    // onChange={this.handleSearch}
-                    // searchText="This is initial search text"
                 />
 
                 <ul>
                     {this.props.results.map((item, index) => (
-                        <li key={item}> {item} </li>
+                        <li key={item}> <Link to={`/user/profile/${item}`}>{item}</Link> </li>
                     ))}
                 </ul>
 
@@ -52,6 +54,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         search: (query) => {
             dispatch(actions.searchUserAction(query));
+        },
+        clearSearch: () => {
+            dispatch(actions.clearUserSearchAction());
         }
     };
 };

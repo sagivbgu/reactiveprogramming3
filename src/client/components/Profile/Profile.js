@@ -7,7 +7,7 @@ import LocationAutoSuggestion from "../Registration/LocationAutoSuggestion";
 import PhotoDropzone from "../Registration/PhotoDropzone";
 
 class Profile extends React.Component {
-    // this.props.user is the user that its profile is wanted
+    // this.props.match.params.user is the user that its profile is wanted
     constructor(props) {
         super(props);
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -16,7 +16,7 @@ class Profile extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
-            newUsername: this.props.user,
+            newUsername: this.props.match.params.user,
             newLocation: '',
             newPhoto: null,
             // TODO: newReviews
@@ -25,7 +25,11 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchProfile(this.props.user);
+        this.props.fetchProfile(this.props.match.params.user);
+    }
+
+    componentWillUnmount() {
+        this.props.clearProfile();
     }
 
     handleChangeUsername(event) {
@@ -124,6 +128,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateProfile: (user, newProfile) => {
             dispatch(actions.updateProfileRequestAction(user, newProfile));
+        },
+        clearProfile: () => {
+            dispatch(actions.clearProfileAction());
         }
     };
 };

@@ -10,6 +10,8 @@ const ProfileReducer = (state = initialState.profile, action) => {
         case ProfileActionsConstants.FETCH_PROFILE_FAILURE:
         case ProfileActionsConstants.UPDATE_PROFILE_FAILURE:
             return state.set('error', action.payload);
+        case ProfileActionsConstants.CLEAR_PROFILE:
+            return initialState.profile;
         default:
             return state;
     }

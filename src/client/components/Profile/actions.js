@@ -43,13 +43,20 @@ function updateProfileFailureAction(error) {
     }
 }
 
+function clearProfileAction() {
+    return {
+        type: ProfileActionsConstants.CLEAR_PROFILE
+    }
+}
+
 let actions = {
     fetchProfileRequestAction,
     fetchProfileFailureAction,
     fetchProfileSuccessAction,
     updateProfileRequestAction,
     updateProfileSuccessAction,
-    updateProfileFailureAction
+    updateProfileFailureAction,
+    clearProfileAction
 };
 
 export default actions

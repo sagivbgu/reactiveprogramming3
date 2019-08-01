@@ -7,6 +7,8 @@ const UserSearchReducer = (state = initialState.userSearch, action) => {
             return state.set('results', action.payload).set('error', '');
         case UserSearchActionsConstants.SEARCH_USER_FAILURE:
             return state.set('error', action.payload);
+        case UserSearchActionsConstants.CLEAR_USER_SEARCH:
+            return initialState.userSearch;
         default:
             return state;
     }

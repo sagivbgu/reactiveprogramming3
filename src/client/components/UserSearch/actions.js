@@ -19,10 +19,17 @@ function searchUserFailureAction(error) {
     }
 }
 
+function clearUserSearchAction() {
+    return {
+        type: UserSearchActionsConstants.CLEAR_USER_SEARCH
+    }
+}
+
 let actions = {
     searchUserAction,
     searchUserSuccessAction,
-    searchUserFailureAction
+    searchUserFailureAction,
+    clearUserSearchAction
 };
 
 export default actions
