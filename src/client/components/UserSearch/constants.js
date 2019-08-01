@@ -1,0 +1,5 @@
+export const UserSearchActionsConstants = {
+    SEARCH_USER: 'SEARCH_USER',
+    SEARCH_USER_SUCCESS: 'SEARCH_USER_SUCCESS',
+    SEARCH_USER_FAILURE: 'SEARCH_USER_FAILURE',
+};

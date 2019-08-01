@@ -23,6 +23,10 @@ export default {
         reviews: [],
         error: ''
     }),
+    userSearch: Map({
+        results: [],
+        error: ''
+    }),
     restaurants: Map({
         restaurants: List()
     })
