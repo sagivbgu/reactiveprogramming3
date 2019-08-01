@@ -17,15 +17,17 @@ class HomePage extends React.Component {
     }
 
     render() {
+        let loggedUser = this.props.loggedUser;
         return (
             <div>
-                <h3> Home page </h3>
-                {/*<Profile user={this.props.loggedUser}/>*/}
+                <h2> Home page </h2>
+                <div> Hi {loggedUser}!</div>
+                <div><Link to={`/user/profile/${loggedUser}`}>Profile</Link></div>
                 <div>
                     <Link to="/user/search">Search users</Link>
                 </div>
                 <div>
-                    {this.props.loggedUser && <button onClick={this.onLogoutClicked}> Logout </button>}
+                    {loggedUser && <button onClick={this.onLogoutClicked}> Logout </button>}
                 </div>
             </div>
         );
