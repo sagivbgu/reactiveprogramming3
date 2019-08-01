@@ -8,6 +8,7 @@ import Button from "./Button";
 import {connect} from "react-redux";
 import actions from "../Restaurants/actions";
 import Select from "react-select"
+import moment from "moment";
 
 class Reviews extends Component {
     constructor() {
@@ -128,7 +129,10 @@ class Reviews extends Component {
     }
 
     sortReviewsBySelectedOption(reviews) {
-        var today = new Date();
+        let sinceLastFilter = (x, amount, review) => {
+            var today = new moment();
+            return review.date - today.subtract(1, x).toDate() > 0;
+        };
 
         switch (this.state.selectedSortingOption) {
             case "Newest":
@@ -136,13 +140,11 @@ class Reviews extends Component {
             case "Oldest":
                 return reviews.sort((a, b) => a.date - b.date);
             case "Since last week":
-                let a = (today - 7) - reviews[0].date;
-                let b = reviews[0].date - (today - 7);
-                return reviews.filter(review => (today - 7) - review.date > 0);
+                return reviews.filter(review => sinceLastFilter('day', 7, review));
             case "Since last month":
-
+                return reviews.filter(review => sinceLastFilter('month', 1, review));
             case "Since last year":
-
+                return reviews.filter(review => sinceLastFilter('year', 1, review));
             default:
                 let compareTopics = (a, b, topic) => (b.ratings[topic] - a.ratings[topic]);
                 return reviews.sort((a, b) => compareTopics(a, b, this.state.selectedSortingOption));
