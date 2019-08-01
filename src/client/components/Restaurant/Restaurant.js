@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
 import Reviews from "./Reviews";
+import actions from "../Restaurants/actions";
 
 
 class Restaurant extends React.Component {
@@ -9,8 +10,17 @@ class Restaurant extends React.Component {
         //this.state = {};
     }
 
+    componentWillMount() {
+        if (null == this.props.restaurants[this.props.match.params.restaurantIndex]) {
+            this.props.fetchAllRestaurants();
+        }
+    }
+
     render() {
         const restaurant = this.props.restaurants[this.props.match.params.restaurantIndex]
+        if (null == restaurant) {
+            return <div></div>
+        }
 
         return (
             <div>
@@ -28,7 +38,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        fetchAllRestaurants: () => {
+            dispatch(actions.fetchAllRestaurantsRequest());
+        }
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurant);

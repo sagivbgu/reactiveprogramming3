@@ -73,9 +73,6 @@ class Reviews extends Component {
             {label: "Oldest"}
         ].concat(sorting_topics_options);
 
-        console.log(sorting_topics_options);
-        console.log(sorting_options);
-
         return (
             <div className="">
 
