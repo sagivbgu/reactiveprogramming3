@@ -56,7 +56,6 @@ class Profile extends React.Component {
     render() {
         let editable = this.props.username === this.props.loggedUser;
         let photo = this.props.photo.get('data');
-        console.log('photo data: ', photo);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -80,7 +79,7 @@ class Profile extends React.Component {
                             New username:
                             <input type="text"
                                    name="username"
-                                   value=""
+                                   value={this.state.newUsername}
                                    onChange={this.handleChangeUsername}
                                    disabled={!editable}
                             />

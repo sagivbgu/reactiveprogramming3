@@ -11,6 +11,17 @@ let UserModel = require('../model/user');
   })
 }*/
 
+function getJson(userDoc) {
+    return {
+        username: userDoc.username,
+        location: userDoc.location,
+        photo: {
+            data: userDoc.photo.data.toString(),
+            contentType: userDoc.photo.contentType
+        }
+    }
+}
+
 module.exports = (app) => {
     app.post('/api/user/registration', function (req, res) {
         console.log('in user registration');
@@ -31,11 +42,7 @@ module.exports = (app) => {
                         },
                     });
                     newUser.save(function (err, newUser) {
-                        if (err) {
-                            res.json({success: false, error: err})
-                        } else {
-                            res.json({success: true});
-                        }
+                        err ? res.json({success: false, error: err}) : res.json({success: true});
                     });
                 }
             })
@@ -55,14 +62,7 @@ module.exports = (app) => {
         let username = req.query.username;
         UserModel.findOne({username: username})
             .then(doc => {
-                doc == null ? res.json({error: `User ${req.body.username} doesn't exist`}) : res.json({
-                    username: doc.username,
-                    location: doc.location,
-                    photo: {
-                        data: doc.photo.data.toString('base64'),
-                        contentType: doc.photo.contentType
-                    }
-                });
+                doc == null ? res.json({error: `User ${req.body.username} doesn't exist`}) : res.json(getJson(doc));
             });
     });
 
@@ -75,22 +75,15 @@ module.exports = (app) => {
                     console.log('user not found: ', oldUsername);
                     res.json({error: `User ${oldUsername} does not exist`});
                 } else {
+                    // TODO: Make sure newUser doesn't already exist
                     console.log('updating user: ', oldUsername);
-                    let {username, location} = req.body.profile;
-                    let user = new UserModel({
-                        username,
-                        location,
-                        photo: {
-                            data: new Buffer.from(req.body.profile.photo.photo),
-                            contentType: req.body.profile.photo.contentType
-                        },
-                    });
-                    user.save(function (err, user) {
-                        if (err) {
-                            res.json({error: err})
-                        } else {
-                            res.json(user);
-                        }
+                    doc.username = req.body.profile.username;
+                    doc.location = req.body.profile.location;
+                    doc.photo.data = new Buffer.from(req.body.profile.photo.photo);
+                    doc.photo.contentType = req.body.profile.photo.contentType;
+
+                    doc.save(function (err, doc) {
+                        err ? res.json({error: err}) : res.json(getJson(doc));
                     });
                 }
             })

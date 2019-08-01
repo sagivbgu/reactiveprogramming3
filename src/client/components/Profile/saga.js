@@ -2,6 +2,7 @@ import {call, put, takeLatest, all} from 'redux-saga/effects'
 import Actions from './actions'
 import {ProfileActionsConstants} from "./constants";
 import {getBase64} from "../../utils";
+import AppActions from "../App/actions";
 
 const FETCH_PROFILE_URL = '/api/user/profile';
 const UPDATE_PROFILE_URL = '/api/user/profile/update';
@@ -58,6 +59,7 @@ function* updateProfile(action) {
             yield put(Actions.updateProfileFailureAction(json.error));
         } else {
             yield put(Actions.updateProfileSuccessAction(json));
+            yield put(AppActions.loginAction(json.username));
         }
     } catch (e) {
         yield put(Actions.updateProfileFailureAction(e.message));
