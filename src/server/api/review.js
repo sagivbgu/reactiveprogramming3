@@ -34,7 +34,7 @@ module.exports = (app) => {
                     $push: {
                         reviewsIds: {
                             $each: [review._id],
-                            $position: 0
+                            $position: -1
                         }
                     }
                 }

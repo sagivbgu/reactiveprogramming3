@@ -15,7 +15,6 @@ class Restaurant extends React.Component {
         return (
             <div>
                 <p>Welcome to {restaurant.name}, {restaurant.location}</p>
-                <p>Reviews & Ratings:</p>
                 <Reviews restaurantId={restaurant._id}/>
             </div>
         );

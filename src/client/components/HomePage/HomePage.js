@@ -19,9 +19,8 @@ class HomePage extends React.Component {
         return (
             <div>
                 <h3> Home page </h3>
-                <Restaurants history={this.props.history}/>
-
                 {this.props.loggedUser && <button onClick={this.onLogoutClicked}> Logout </button>}
+                <Restaurants history={this.props.history}/>
             </div>
         );
     }

@@ -21,7 +21,7 @@ class Restaurants extends React.Component {
     }
 
     componentWillMount() {
-        this.props.fetchAllRestaurants()
+        this.props.fetchAllRestaurants();
     }
 
     onClickThumbnail(index, event) {
@@ -42,7 +42,6 @@ class Restaurants extends React.Component {
     }
 }
 
-// TODO: 2
 const mapStateToProps = (state) => {
     return {
         restaurants: state.restaurants.toList().toArray()

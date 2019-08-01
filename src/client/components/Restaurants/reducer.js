@@ -8,7 +8,12 @@ const RestaurantsReducer = (state = initialState.restaurants, action) => {
             let restaurants = Object(action.payload.restaurants.map(restaurant => {
                     return [restaurant._id, {
                         ...restaurant,
-                        reviews: List(restaurant.reviews),
+                        reviews: List(restaurant.reviews.map(review => {
+                            return {
+                                ...review,
+                                date: new Date(review.date)
+                            }
+                        })),
                         src: restaurant.thumbnail,
                         thumbnailCaption: restaurant.name
                     }];
