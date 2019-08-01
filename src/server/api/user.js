@@ -78,7 +78,7 @@ module.exports = (app) => {
                     let newUsername = req.body.profile.username;
                     UserModel.findOne({username: newUsername})
                         .then(duplicatedUserDoc => {
-                            if (duplicatedUserDoc != null) {
+                            if (newUsername !== oldUsername && duplicatedUserDoc != null) {
                                 res.json({error: `User ${newUsername} already exists`});
                             } else {
                                 console.log('updating user: ', oldUsername);
