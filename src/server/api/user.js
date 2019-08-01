@@ -106,8 +106,9 @@ module.exports = (app) => {
 };
 
 async function searchUser(query) {
-    const searchByUsername = UserModel.find({username: query}).exec;
-    const searchByLocation = UserModel.find({location: query}).exec;
-    let [usernameSearchResult, locationSearchResult] = await Promise.all([searchByUsername(), searchByLocation()]);
+    const searchByUsername = () => UserModel.find({username: query}).exec();
+    const searchByLocation = () => UserModel.find({location: query}).exec();
+
+    [usernameSearchResult, locationSearchResult] = await Promise.all([searchByUsername(), searchByLocation()]);
     return usernameSearchResult.map(doc => doc.username).concat(locationSearchResult.map(doc => doc.username));
 }

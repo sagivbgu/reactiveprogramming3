@@ -11,6 +11,7 @@ import Login from "./components/Registration/Login";
 import App from "./components/App/App";
 import HomePage from "./components/HomePage/HomePage";
 import Restaurant from "./components/Restaurant/Restaurant";
+import UserSearch from "./components/UserSearch/UserSearch";
 
 //create saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -29,9 +30,10 @@ ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <Route path="/" exact component={App}/>
+            <Route path="/home/" component={HomePage}/>
             <Route path="/login/" component={Login}/>
             <Route path="/registration/" component={Registration}/>
-            <Route path="/home/" component={HomePage}/>
+            <Route path="/user/search/" component={UserSearch}/>
             <Route exact path="/restaurants/:rest_id" component={Restaurant} />
         </BrowserRouter>
     </Provider>,

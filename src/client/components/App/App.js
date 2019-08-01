@@ -7,7 +7,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                {this.props.loggedUser ? <Redirect to="/home"/> : <Redirect to="/login"/>}
+                {this.props.loggedUser ? <Redirect to="/home/"/> : <Redirect to="/login"/>}
             </div>
         );
     }

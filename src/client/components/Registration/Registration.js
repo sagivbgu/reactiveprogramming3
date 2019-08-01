@@ -61,7 +61,7 @@ class Registration extends React.Component {
     render() {
         return (
             <div>
-                {this.props.loggedUser && <Redirect to="/home"/>}
+                {this.props.loggedUser && <Redirect to="/home/"/>}
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Username:
