@@ -15,9 +15,9 @@ class Review extends Component {
 
                     <ul className="reviews__list">
                         {
-                            Object.keys(this.props.review.ratings).map(key => {
+                            Object.keys(this.props.review.ratings).map((key, idx) => {
                                 return (
-                                    <li> {key}: <Rating initialRating={this.props.review.ratings[key]}
+                                    <li key={idx}> {key}: <Rating initialRating={this.props.review.ratings[key]}
                                                         readonly={true}
                                                         emptySymbol={<img src={emptystar} className="icon"/>}
                                                         fullSymbol={<img src={yellowstar} className="icon"/>}/>

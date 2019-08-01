@@ -6,7 +6,7 @@ class List extends Component {
     {
         return (
             <ul className="reviews__list">
-                {this.props.reviews.map((review, index) => <Review index={index} review={review}/>)}
+                {this.props.reviews.map((review, index) => <Review key={index} index={index} review={review}/>)}
             </ul>
         );
     }
