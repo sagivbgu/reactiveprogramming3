@@ -95,4 +95,19 @@ module.exports = (app) => {
                 }
             })
     });
+
+    app.get('/api/user/search', function (req, res) {
+        console.log('inside /api/user/search');
+        let query = req.query.query;
+        searchUser(query)
+            .then(results => res.json(results))
+            .catch(error => res.json({error: error.message}));
+    });
 };
+
+async function searchUser(query) {
+    const searchByUsername = UserModel.find({username: query}).exec;
+    const searchByLocation = UserModel.find({location: query}).exec;
+    let [usernameSearchResult, locationSearchResult] = await Promise.all([searchByUsername(), searchByLocation()]);
+    return usernameSearchResult.map(doc => doc.username).concat(locationSearchResult.map(doc => doc.username));
+}
