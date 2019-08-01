@@ -14,7 +14,7 @@ class Reviews extends Component {
         super();
 
         this.state = {
-            selectedOption: "Newest",
+            selectedSortingOption: "Newest",
             form: {
                 isFormActive: false,
                 reviewText: '',
@@ -36,7 +36,7 @@ class Reviews extends Component {
 
         this.submitForm = this.submitForm.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.selectOnChange = this.selectOnChange.bind(this);
+        this.sortingSelectOnChange = this.sortingSelectOnChange.bind(this);
 
         this.onChanges = {};
         Object.keys(this.state.form.ratings).forEach(key => {
@@ -55,9 +55,9 @@ class Reviews extends Component {
         })
     }
 
-    selectOnChange(selectedOption) {
+    sortingSelectOnChange(selectedOption) {
         this.setState({
-            selectedOption: selectedOption.label
+            selectedSortingOption: selectedOption.label
         })
     }
 
@@ -70,7 +70,10 @@ class Reviews extends Component {
 
         let sorting_options = [
             {label: "Newest"},
-            {label: "Oldest"}
+            {label: "Oldest"},
+            {label: "Since last week"},
+            {label: "Since last month"},
+            {label: "Since last year"}
         ].concat(sorting_topics_options);
 
         return (
@@ -78,9 +81,9 @@ class Reviews extends Component {
 
                 {reviews.length !== 0 && <p>Sort reviews by:</p>}
                 {reviews.length !== 0 && < Select options={sorting_options}
-                                                  value={this.state.selectedOption}
-                                                  onChange={this.selectOnChange}/>}
-
+                                                  placeholder={this.state.selectedSortingOption}
+                                                  value={this.state.selectedSortingOption}
+                                                  onChange={this.sortingSelectOnChange}/>}
 
                 <div className="">
                     <p>Reviews & Ratings:</p>
@@ -125,12 +128,25 @@ class Reviews extends Component {
     }
 
     sortReviewsBySelectedOption(reviews) {
-        let compareTopics = (a, b, topic) => (b.ratings[topic] - a.ratings[topic]);
+        var today = new Date();
 
-        if (this.state.selectedOption === "Newest") return reviews.sort((a, b) => b.date - a.date);
-        if (this.state.selectedOption === "Oldest") return reviews.sort((a, b) => a.date - b.date);
+        switch (this.state.selectedSortingOption) {
+            case "Newest":
+                return reviews.sort((a, b) => b.date - a.date);
+            case "Oldest":
+                return reviews.sort((a, b) => a.date - b.date);
+            case "Since last week":
+                let a = (today - 7) - reviews[0].date;
+                let b = reviews[0].date - (today - 7);
+                return reviews.filter(review => (today - 7) - review.date > 0);
+            case "Since last month":
 
-        return reviews.sort((a, b) => compareTopics(a, b, this.state.selectedOption));
+            case "Since last year":
+
+            default:
+                let compareTopics = (a, b, topic) => (b.ratings[topic] - a.ratings[topic]);
+                return reviews.sort((a, b) => compareTopics(a, b, this.state.selectedSortingOption));
+        }
     }
 
     renderList() {
@@ -158,7 +174,7 @@ class Reviews extends Component {
             this.setState(prevState => ({
                 form: {
                     ...prevState.form,
-                    validation: <div className="validation">Error</div>
+                    validation: <div className="validation">Please fill all the review details</div>
                 }
             }));
             return;

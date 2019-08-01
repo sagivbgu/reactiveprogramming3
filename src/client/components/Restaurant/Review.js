@@ -18,9 +18,10 @@ class Review extends Component {
                             Object.keys(this.props.review.ratings).map((key, idx) => {
                                 return (
                                     <li key={idx}> {key}: <Rating initialRating={this.props.review.ratings[key]}
-                                                        readonly={true}
-                                                        emptySymbol={<img src={emptystar} className="icon"/>}
-                                                        fullSymbol={<img src={yellowstar} className="icon"/>}/>
+                                                                  readonly={true}
+                                                                  emptySymbol={<img src={emptystar} className="icon"/>}
+                                                                  fullSymbol={<img src={yellowstar}
+                                                                                   className="icon"/>}/>
                                     </li>)
                             })
                         }
@@ -35,11 +36,12 @@ class Review extends Component {
         );
     }
 
+
     getDate(date) {
         if (typeof date === 'object') {
             return (
                 <span className="review__date">
-                    {date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear()}
+                    {date.toString()}
                 </span>
             );
         }
