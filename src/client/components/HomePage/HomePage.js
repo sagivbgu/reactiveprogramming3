@@ -23,9 +23,14 @@ class HomePage extends React.Component {
             <div>
                 <h2> Home page </h2>
                 <div> Hi {loggedUser}!</div>
-                <div><Link to={`/user/profile/${loggedUser}`}>Profile</Link></div>
+                <div><
+                    Link to={`/user/profile/${loggedUser}`}>Profile</Link>
+                </div>
                 <div>
                     <Link to="/user/search">Search users</Link>
+                </div>
+                <div>
+                    <Link to="/restaurants/add">Add a new restaurant</Link>
                 </div>
                 <div>
                     {loggedUser && <button className={'link'} onClick={this.onLogoutClicked}> Logout </button>}
