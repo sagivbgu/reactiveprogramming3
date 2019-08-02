@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from 'react-redux';
 import Reviews from "./Reviews";
 import actions from "../Restaurants/actions";
+import {Link} from "react-router-dom";
 
 
 class Restaurant extends React.Component {
@@ -26,6 +27,7 @@ class Restaurant extends React.Component {
             <div>
                 <p>Welcome to {restaurant.name}, {restaurant.location}</p>
                 <Reviews restaurantId={restaurant._id}/>
+                <Link to="/home/">Back to home page</Link>
             </div>
         );
     }
