@@ -27,5 +27,16 @@ module.exports = (app) => {
             res.json({success: false, error: err})
         }
     });
+
+    app.post('/api/restaurant/deletereview', async function (req, res) {
+        console.log('in restaurant deletereview');
+
+        try {
+            await ReviewModel.findByIdAndRemove(req.body.reviewId);
+            res.json({})
+        } catch (e) {
+            res.json({error: e.message})
+        }
+    });
 };
 

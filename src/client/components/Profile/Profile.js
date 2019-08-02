@@ -58,6 +58,10 @@ class Profile extends React.Component {
         });
     }
 
+    onDeleteReview(review, reviewIndex) {
+        this.props.deleteReview(review._id, reviewIndex);
+    }
+
     render() {
         let editable = this.props.username === this.props.loggedUser;
         let photo = this.props.photo.get('data');
@@ -80,9 +84,17 @@ class Profile extends React.Component {
                         <div> Reviews:</div>
                     </label>
 
-                    {this.props.reviews.map((review, index) => (
-                        <Review key={index} index={index} review={review}/>
-                    ))}
+                    {this.props.reviews.map((review, index) => {
+                            review = review.toJS();
+                            let reviewComponent = <Review key={index} index={index} review={review}/>;
+                            let deleteReviewComponent = <button type="button"
+                                                                onClick={() => this.onDeleteReview(review, index)}>
+                                Delete review </button>;
+                            let deletableReviewComponent = <div key={index}>
+                                {reviewComponent} {deleteReviewComponent} </div>;
+                            return editable ? deletableReviewComponent : reviewComponent;
+                        }
+                    )}
 
                     <div hidden={!editable}>
                         <h2> Update profile </h2>
@@ -110,7 +122,9 @@ class Profile extends React.Component {
                         <input type="submit" value="Update"/>
                     </div>
                 </form>
-                <div className="error-message"> {this.props.error} </div>
+                < div
+                    className="error-message"> {this.props.error}
+                </div>
                 <Link to="/home/">Back to home page</Link>
             </div>
         );
@@ -139,6 +153,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         clearProfile: () => {
             dispatch(actions.clearProfileAction());
+        },
+        deleteReview: (reviewId, reviewIndex) => {
+            dispatch(actions.deleteReviewAction(reviewId, reviewIndex));
         }
     };
 };

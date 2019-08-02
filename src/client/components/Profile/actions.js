@@ -43,6 +43,25 @@ function updateProfileFailureAction(error) {
     }
 }
 
+function deleteReviewAction(reviewId, reviewIndex) {
+    return {
+        type: ProfileActionsConstants.DELETE_REVIEW,
+        payload: {
+            reviewId: reviewId,
+            reviewIndex: reviewIndex
+        }
+    }
+}
+
+function deleteReviewSuccessAction(deletedReviewIndex) {
+    return {
+        type: ProfileActionsConstants.DELETE_REVIEW_SUCCESS,
+        payload: {
+            reviewIndex: deletedReviewIndex
+        }
+    }
+}
+
 function clearProfileAction() {
     return {
         type: ProfileActionsConstants.CLEAR_PROFILE
@@ -56,6 +75,8 @@ let actions = {
     updateProfileRequestAction,
     updateProfileSuccessAction,
     updateProfileFailureAction,
+    deleteReviewAction,
+    deleteReviewSuccessAction,
     clearProfileAction
 };
 

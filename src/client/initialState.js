@@ -20,22 +20,12 @@ export default {
             data: null,
             contentType: ''
         }),
-        reviews: [],
+        reviews: List(),
         error: ''
     }),
     userSearch: Map({
         results: [],
         error: ''
     }),
-    restaurants: Map(
-        // restaurantId: {
-        //     _id: '',
-        //     name: '',
-        //     location: '',
-        //     reviewsIds: List(),
-        //     thumbnailLink: '',
-        //     thumbnailWidth: 0,
-        //     thumbnailHeight: 0
-        // }
-    ),
+    restaurants: Map(),
 };

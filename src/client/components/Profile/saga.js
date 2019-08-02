@@ -6,6 +6,7 @@ import AppActions from "../App/actions";
 
 const FETCH_PROFILE_URL = '/api/user/profile';
 const UPDATE_PROFILE_URL = '/api/user/profile/update';
+const DELETE_REVIEW_URL = '/api/restaurant/deletereview';
 
 function* fetchProfile(action) {
     console.log('inside fetchProfile Saga. Action=', action);
@@ -50,7 +51,8 @@ function* updateProfile(action) {
                         username: action.payload.username,
                         location: action.payload.location,
                         photo: photo
-                    }})
+                    }
+                })
             });
 
         const json = yield call([res, 'json']); //retrieve body of response
@@ -60,6 +62,33 @@ function* updateProfile(action) {
         } else {
             yield put(Actions.updateProfileSuccessAction(json));
             yield put(AppActions.loginAction(json.username));
+        }
+    } catch (e) {
+        yield put(Actions.updateProfileFailureAction(e.message));
+    }
+}
+
+function* deleteReview(action) {
+    console.log('inside deleteReview Saga. Action=', action);
+
+    try {
+        const reviewId = action.payload.reviewId;
+
+        const res = yield call(fetch, DELETE_REVIEW_URL,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({reviewId: reviewId})
+            });
+
+        const json = yield call([res, 'json']); //retrieve body of response
+
+        if (json.error) {
+            yield put(Actions.updateProfileFailureAction(json.error));
+        } else {
+            yield put(Actions.deleteReviewSuccessAction(action.payload.reviewIndex));
         }
     } catch (e) {
         yield put(Actions.updateProfileFailureAction(e.message));
@@ -76,11 +105,17 @@ function* updateProfileSaga() {
     yield takeLatest(ProfileActionsConstants.UPDATE_PROFILE_REQUEST, updateProfile);
 }
 
+function* deleteReviewSaga() {
+    console.log('inside delete review saga');
+    yield takeLatest(ProfileActionsConstants.DELETE_REVIEW, deleteReview);
+}
+
 function* ProfileSaga() {
     console.log('inside ProfileSaga');
     yield all([
         fetchProfileSaga(),
-        updateProfileSaga()
+        updateProfileSaga(),
+        deleteReviewSaga()
     ]);
 }
 
