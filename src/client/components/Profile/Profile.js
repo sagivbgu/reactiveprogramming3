@@ -19,8 +19,7 @@ class Profile extends React.Component {
         this.state = {
             newUsername: this.props.match.params.user,
             newLocation: '',
-            newPhoto: null,
-            // TODO: newReviews
+            newPhoto: null
         };
         console.log('props on ctor: ', this.props);
     }
@@ -67,6 +66,9 @@ class Profile extends React.Component {
         let photo = this.props.photo.get('data');
         return (
             <div>
+                <div>
+                    <Link to="/home/">Back to home page</Link>
+                </div>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Username:
@@ -126,7 +128,6 @@ class Profile extends React.Component {
                 < div
                     className="error-message"> {this.props.error}
                 </div>
-                <Link to="/home/">Back to home page</Link>
             </div>
         );
     }

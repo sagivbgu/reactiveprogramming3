@@ -23,6 +23,9 @@ class UserSearch extends React.Component {
     render() {
         return (
             <div>
+                <div>
+                    <Link to="/home/">Back to home page</Link>
+                </div>
                 <SearchField
                     placeholder="Search..."
                     onEnter={this.handleSearch}
@@ -31,12 +34,11 @@ class UserSearch extends React.Component {
 
                 <ul>
                     {this.props.results.map((item, index) => (
-                        <li key={item}> <Link to={`/user/profile/${item}`}>{item}</Link> </li>
+                        <li key={item}><Link to={`/user/profile/${item}`}>{item}</Link></li>
                     ))}
                 </ul>
 
                 <div className="error-message"> {this.props.error} </div>
-                <Link to="/home/">Back to home page</Link>
             </div>
         );
     }

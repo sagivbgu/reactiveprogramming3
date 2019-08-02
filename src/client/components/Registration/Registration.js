@@ -60,6 +60,9 @@ class Registration extends React.Component {
     render() {
         return (
             <div>
+                <div>
+                    <Link to="/login/">Back to login</Link>
+                </div>
                 {this.props.loggedUser && <Redirect to="/home/"/>}
                 <form onSubmit={this.handleSubmit}>
                     <label>
@@ -84,7 +87,6 @@ class Registration extends React.Component {
                     <input type="submit" value="Submit"/>
                     <div className="error-message"> {this.props.error} </div>
                 </form>
-                <Link to="/login/">Back to login</Link>
             </div>
         );
     }

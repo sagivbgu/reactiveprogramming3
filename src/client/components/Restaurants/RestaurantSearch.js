@@ -18,10 +18,6 @@ class RestaurantSearch extends React.Component {
         }
     }
 
-    componentWillUnmount() {
-        this.props.clearSearch();
-    }
-
     handleSearch(text) {
         console.log('Submitting');
         let {byName, byLocation} = this.state;
@@ -33,6 +29,9 @@ class RestaurantSearch extends React.Component {
     render() {
         return (
             <div>
+                <div>
+                    <Link to="/home/">Back to home page</Link>
+                </div>
                 <SearchField
                     placeholder="Search..."
                     onEnter={this.handleSearch}
@@ -55,10 +54,6 @@ class RestaurantSearch extends React.Component {
                 <div>
                     <Restaurants history={this.props.history}/>
                 </div>
-
-                <div>
-                    <Link to="/home/">Back to home page</Link>
-                </div>
             </div>
         );
     }
@@ -75,9 +70,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         search: (query, byName, byLocation) => {
             dispatch(actions.searchRestaurantAction(query, byName, byLocation));
-        },
-        clearSearch: () => {
-            dispatch(actions.clearRestaurantSearchAction());
         }
     };
 };

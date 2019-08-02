@@ -13,7 +13,7 @@ function getRestaurantsForState(restaurants) {
                 }
             })),
             src: restaurant.thumbnail,
-            thumbnailCaption: restaurant.name
+            thumbnailCaption: restaurant.name + ', ' + restaurant.location
         }];
     }));
     return new Map(restaurantsObj);
@@ -31,9 +31,6 @@ const RestaurantsReducer = (state = initialState.restaurants, action) => {
 
         case RestaurantsActions.SEARCH_RESTAURANT_SUCCESS:
             return getRestaurantsForState(action.payload);
-
-        case RestaurantsActions.CLEAR_RESTAURANT_SEARCH:
-            return initialState.restaurants;
 
         case RestaurantsActions.SEARCH_RESTAURANT_FAILURE:
         default:

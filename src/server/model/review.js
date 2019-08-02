@@ -10,9 +10,6 @@ let reviewSchema = new Schema({
         type: Map,
         of: Number
     }
-
-    // TODO:
-    // pictures: ??
 });
 
 module.exports = mongoose.model('ReviewModel', reviewSchema);

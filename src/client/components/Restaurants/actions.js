@@ -67,12 +67,6 @@ function searchRestaurantFailureAction(error) {
     }
 }
 
-function clearRestaurantSearchAction() {
-    return {
-        type: RestaurantsActions.CLEAR_RESTAURANT_SEARCH
-    }
-}
-
 let actions = {
     fetchAllRestaurantsResultAction,
     fetchAllRestaurantsRequest,
@@ -82,8 +76,7 @@ let actions = {
     addRestaurantResult,
     searchRestaurantAction,
     searchRestaurantSuccessAction,
-    searchRestaurantFailureAction,
-    clearRestaurantSearchAction
+    searchRestaurantFailureAction
 };
 
 export default actions

@@ -24,9 +24,11 @@ class Restaurant extends React.Component {
 
         return (
             <div>
+                <div>
+                    <Link to="/home/">Back to home page</Link>
+                </div>
                 <p>Welcome to {restaurant.name}, {restaurant.location}</p>
                 <Reviews restaurantId={restaurant._id}/>
-                <Link to="/home/">Back to home page</Link>
             </div>
         );
     }

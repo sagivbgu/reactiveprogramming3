@@ -1,10 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
-import Gallery from 'react-grid-gallery';
 import actions from "./actions";
-import Rating from "react-rating";
-import emptystar from "../Restaurant/assets/images/star-empty.png";
-import yellowstar from "../Restaurant/assets/images/star-yellow.png";
+import {Link} from "react-router-dom";
 
 class AddRestaurant extends React.Component {
     constructor(props) {
@@ -26,60 +23,65 @@ class AddRestaurant extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.onFormSubmit}>
-                <label>
-                    Restaurant name:
-                    <input type="text"
-                           name="name"
-                           value={this.state.name}
-                           onChange={this.onChange}
-                    />
-                    <span className='error-message'>
+            <div>
+                <div>
+                    <Link to="/home/">Back to home page</Link>
+                </div>
+                <form onSubmit={this.onFormSubmit}>
+                    <label>
+                        Restaurant name:
+                        <input type="text"
+                               name="name"
+                               value={this.state.name}
+                               onChange={this.onChange}
+                        />
+                        <span className='error-message'>
                         {this.state.restaurantNameAlreadyExists && 'Restaurant with the same name already exists!'}
                     </span>
-                </label>
+                    </label>
 
-                <label>
-                    Location:
-                    <input type="text"
-                           name="location"
-                           value={this.state.location}
-                           onChange={this.onChange}
-                    />
-                </label>
+                    <label>
+                        Location:
+                        <input type="text"
+                               name="location"
+                               value={this.state.location}
+                               onChange={this.onChange}
+                        />
+                    </label>
 
-                <label>
-                    Thumbnail url:
-                    <input type="text"
-                           name="thumbnail"
-                           value={this.state.thumbnailUrl}
-                           onChange={this.onChange}
-                    />
-                </label>
+                    <label>
+                        Thumbnail url:
+                        <input type="text"
+                               name="thumbnail"
+                               value={this.state.thumbnailUrl}
+                               onChange={this.onChange}
+                        />
+                    </label>
 
-                <label>
-                    Thumbnail height:
-                    <input type="text"
-                           name="thumbnailHeight"
-                           value={this.state.thumbnailHeight}
-                           onChange={this.onChange}
-                    />
-                </label>
+                    <label>
+                        Thumbnail height:
+                        <input type="text"
+                               name="thumbnailHeight"
+                               value={this.state.thumbnailHeight}
+                               onChange={this.onChange}
+                        />
+                    </label>
 
-                <label>
-                    Thumbnail width:
-                    <input type="text"
-                           name="thumbnailWidth"
-                           value={this.state.thumbnailWidth}
-                           onChange={this.onChange}
-                    />
-                </label>
+                    <label>
+                        Thumbnail width:
+                        <input type="text"
+                               name="thumbnailWidth"
+                               value={this.state.thumbnailWidth}
+                               onChange={this.onChange}
+                        />
+                    </label>
 
-                <input type="submit" value="Submit"/>
-                <span className='error-message'>
+                    <input type="submit" value="Submit"/>
+                    <span className='error-message'>
                         {!this.state.allFieldsAnsweredOnSubmit && "Please fill all fields!"}
                 </span>
-            </form>
+                </form>
+            </div>
         );
     }
 
