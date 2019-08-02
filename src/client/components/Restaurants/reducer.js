@@ -21,11 +21,11 @@ function getRestaurantsForState(restaurants) {
 
 const RestaurantsReducer = (state = initialState.restaurants, action) => {
     switch (action.type) {
-        case RestaurantsActions.FETCH_ALL_RESTAURANTS_RESULT:
+        case RestaurantsActions.FETCH_ALL_RESTAURANTS_SUCCESS_RESULT:
             return getRestaurantsForState(action.payload.restaurants);
 
-        case RestaurantsActions.ADD_REVIEW_RESULT:
-            console.log('inside RestaurantReducer.ADD_REVIEW_RESULT', action.payload);
+        case RestaurantsActions.ADD_REVIEW_SUCCESS_RESULT:
+            console.log('inside RestaurantReducer.ADD_REVIEW_SUCCESS_RESULT', action.payload);
             let review = action.payload;
             return state.updateIn([review.restaurantId, 'reviews'], reviews => reviews.unshift(review));
 
