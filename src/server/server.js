@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
-const {resolve} = require('path');
 const fs = require('fs');
 const path = require('path');
 

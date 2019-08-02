@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
 let ReviewModel = require('../model/review');
-let RestaurantModel = require('../model/restaurant');
 
 module.exports = (app) => {
     app.post('/api/restaurant/addreview', async function (req, res) {

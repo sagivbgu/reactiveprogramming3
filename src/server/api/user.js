@@ -1,17 +1,6 @@
-let axios = require('axios');
 let UserModel = require('../model/user');
 let ReviewModel = require('../model/review');
 let RestaurantModel = require('../model/restaurant');
-
-/*async function getImages(tag) {
-  const getImagesUrl = `services/rest/?method=flickr.photos.search&api_key=522c1f9009ca3609bcbaf08545f067ad&tags=${tag}&tag_mode=any&per_page=100&format=json&safe_search=1&nojsoncallback=1`;
-  const baseUrl = 'https://api.flickr.com/';
-  return await axios({
-    url: getImagesUrl,
-    baseURL: baseUrl,
-    method: 'GET'
-  })
-}*/
 
 function getJson(userDoc) {
     return {

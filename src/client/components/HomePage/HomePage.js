@@ -1,10 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import AppActions from "../App/actions";
-import Restaurants from "../Restaurants/Restaurants";
-import Profile from "../Profile/Profile";
 import {Link} from "react-router-dom";
-import RestaurantSearch from "../Restaurants/RestaurantSearch";
 
 
 class HomePage extends React.Component {

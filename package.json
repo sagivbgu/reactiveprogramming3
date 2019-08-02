@@ -1,7 +1,7 @@
 {
   "private": true,
   "version": "0.0.1",
-  "description": "Flickr Gallery Template",
+  "description": "Restaurants Reviews",
   "main": "",
   "scripts": {
     "dev": "webpack-dev-server --history-api-fallback",

@@ -1,7 +1,5 @@
 import initialState from '../../initialState';
 import {AppActionsConstants} from './constants.js';
-import {List} from 'immutable';
-import {RegistrationActionsConstants} from "../Registration/constants";
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();

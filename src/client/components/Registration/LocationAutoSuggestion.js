@@ -1,7 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import Autosuggest from 'react-autosuggest';
-import actions from './actions';
 
 const locations = ['Haifa', 'Tel Aviv', 'Jerusalem', 'Beer Sheva', 'Eilat'];
 
