@@ -73,7 +73,7 @@ module.exports = (app) => {
 
             res.json({success: true});
         } catch (error) {
-            res.json({success: false, error: err})
+            res.json({success: false, error: error})
         }
     });
 };

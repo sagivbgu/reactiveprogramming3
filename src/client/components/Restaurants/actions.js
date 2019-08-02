@@ -6,12 +6,19 @@ function fetchAllRestaurantsRequest() {
     }
 }
 
-function fetchAllRestaurantsResultAction(restaurants) {
+function fetchAllRestaurantsSuccessResultAction(restaurants) {
     return {
-        type: RestaurantsActions.FETCH_ALL_RESTAURANTS_RESULT,
+        type: RestaurantsActions.FETCH_ALL_RESTAURANTS_SUCCESS_RESULT,
         payload: {
             restaurants: restaurants
         }
+    }
+}
+
+function fetchAllRestaurantsFailureResultAction(errorMessage) {
+    return {
+        type: RestaurantsActions.FETCH_ALL_RESTAURANTS_FAILURE_RESULT,
+        payload: errorMessage
     }
 }
 
@@ -22,10 +29,17 @@ function addReview(review) {
     }
 }
 
-function addReviewResult(review) {
+function addReviewSuccessResult(review) {
     return {
-        type: RestaurantsActions.ADD_REVIEW_RESULT,
+        type: RestaurantsActions.ADD_REVIEW_SUCCESS_RESULT,
         payload: review
+    }
+}
+
+function addReviewFailureResult(errorMessage) {
+    return {
+        type: RestaurantsActions.ADD_REVIEW_FAILURE_RESULT,
+        payload: errorMessage
     }
 }
 
@@ -36,10 +50,17 @@ function addRestaurant(restaurant) {
     }
 }
 
-function addRestaurantResult(restaurant) {
+function addRestaurantSuccessResult(restaurant) {
     return {
-        type: RestaurantsActions.ADD_RESTAURANT_RESULT,
+        type: RestaurantsActions.ADD_RESTAURANT_SUCCESS_RESULT,
         payload: restaurant
+    }
+}
+
+function addRestaurantFailureResult(errorMessage) {
+    return {
+        type: RestaurantsActions.ADD_RESTAURANT_FAILRE_RESULT,
+        payload: errorMessage
     }
 }
 
@@ -53,6 +74,7 @@ function searchRestaurantAction(query, byName, byLocation) {
         }
     }
 }
+
 function searchRestaurantSuccessAction(restaurants) {
     return {
         type: RestaurantsActions.SEARCH_RESTAURANT_SUCCESS,
@@ -68,12 +90,15 @@ function searchRestaurantFailureAction(error) {
 }
 
 let actions = {
-    fetchAllRestaurantsResultAction,
+    fetchAllRestaurantsSuccessResultAction,
+    fetchAllRestaurantsFailureResultAction,
     fetchAllRestaurantsRequest,
     addReview,
-    addReviewResult,
+    addReviewSuccessResult,
+    addReviewFailureResult,
     addRestaurant,
-    addRestaurantResult,
+    addRestaurantSuccessResult,
+    addRestaurantFailureResult,
     searchRestaurantAction,
     searchRestaurantSuccessAction,
     searchRestaurantFailureAction

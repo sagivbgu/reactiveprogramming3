@@ -12,9 +12,9 @@ function* fetchAllRestaurantsRequest(action) {
     try {
         const res = yield call(fetch, FETCH_ALL_RESTAURANTS);
         const json = yield call([res, 'json']); //retrieve body of response
-        yield put(Actions.fetchAllRestaurantsResultAction(json));
+        yield put(Actions.fetchAllRestaurantsSuccessResultAction(json));
     } catch (e) {
-        // TODO
+        yield put(Actions.fetchAllRestaurantsFailureResultAction(e.message));
     }
 }
 
@@ -39,12 +39,12 @@ function* addReview(action) {
 
         const json = yield call([res, 'json']); //retrieve body of response
         if (json.success) {
-            yield put(Actions.addReviewResult(review));
+            yield put(Actions.addReviewSuccessResult(review));
         } else {
-            // TODO
+            yield put(Actions.addReviewFailureResult("unexpected failure"));
         }
     } catch (e) {
-        // TODO
+        yield put(Actions.addReviewFailureResult(e.message()));
     }
 }
 
@@ -65,12 +65,12 @@ function* addRestaurant(action) {
 
         const json = yield call([res, 'json']); //retrieve body of response
         if (json.success) {
-            yield put(Actions.addRestaurantResult(restaurant));
+            yield put(Actions.addRestaurantSuccessResult(restaurant));
         } else {
-            // TODO
+            yield put(Actions.addRestaurantFailureResult("unexpected failure"));
         }
     } catch (e) {
-        // TODO
+        yield put(Actions.addRestaurantFailureResult(e.message()));
     }
 }
 
@@ -90,7 +90,7 @@ function* searchRestaurant(action) {
             yield put(Actions.searchRestaurantSuccessAction(json));
         }
     } catch (e) {
-            yield put(Actions.searchRestaurantFailureAction(e.message));
+        yield put(Actions.searchRestaurantFailureAction(e.message));
     }
 }
 
