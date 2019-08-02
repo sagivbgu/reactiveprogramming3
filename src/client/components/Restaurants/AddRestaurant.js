@@ -113,13 +113,18 @@ class AddRestaurant extends React.Component {
         }
 
         this.setState({allFieldsAnsweredOnSubmit: allFieldsAnsweredOnSubmit});
-        this.props.addRestaurant({
-            name: target.name.value,
-            location: target.location.value,
-            thumbnail: target.thumbnail.value,
-            thumbnailHeight: target.thumbnailHeight.value,
-            thumbnailWidth: target.thumbnailWidth.value
-        });
+
+        if (allFieldsAnsweredOnSubmit) {
+            this.props.addRestaurant({
+                name: target.name.value,
+                location: target.location.value,
+                thumbnail: target.thumbnail.value,
+                thumbnailHeight: target.thumbnailHeight.value,
+                thumbnailWidth: target.thumbnailWidth.value
+            });
+
+            this.props.history.push("/");
+        }
     }
 }
 

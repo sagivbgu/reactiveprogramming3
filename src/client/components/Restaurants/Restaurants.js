@@ -22,14 +22,11 @@ class Restaurants extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>Restaurants</h2>
-                <Gallery images={this.props.restaurants}
-                         enableImageSelection={false}
-                         margin={50}
-                         onClickThumbnail={this.onClickThumbnail}
-                />
-            </div>
+            <Gallery images={this.props.restaurants}
+                     enableImageSelection={false}
+                     margin={50}
+                     onClickThumbnail={this.onClickThumbnail}
+            />
         );
     }
 }

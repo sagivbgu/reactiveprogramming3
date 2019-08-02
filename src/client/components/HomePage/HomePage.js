@@ -32,6 +32,9 @@ class HomePage extends React.Component {
                     <Link to="/restaurants/search/">Search restaurants</Link>
                 </div>
                 <div>
+                    <Link to="/restaurants/add">Add a new restaurant</Link>
+                </div>
+                <div>
                     {loggedUser && <button className={'link'} onClick={this.onLogoutClicked}> Logout </button>}
                 </div>
             </div>
