@@ -20,4 +20,29 @@ module.exports = (app) => {
 
         res.json(restaurants);
     });
+
+    app.post('/api/restaurant/addrestaurant', async function (req, res) {
+        console.log('in restaurant addrestaurant');
+
+        let restaurant = new RestaurantModel({
+            name: req.body.name,
+            location: req.body.location,
+            thumbnail: req.body.thumbnail,
+            thumbnailHeight: req.body.thumbnailHeight,
+            thumbnailWidth: req.body.thumbnailWidth
+        });
+
+        try {
+            await restaurant.save(function (err, restaurant) {
+                if (err) {
+                    throw err;
+                } else {
+                }
+            });
+
+            res.json({success: true});
+        } catch (error) {
+            res.json({success: false, error: err})
+        }
+    });
 };

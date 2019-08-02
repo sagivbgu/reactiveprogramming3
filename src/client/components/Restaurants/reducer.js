@@ -18,7 +18,7 @@ const RestaurantsReducer = (state = initialState.restaurants, action) => {
                         thumbnailCaption: restaurant.name
                     }];
                 }));
-            return new Map(restaurants)
+            return new Map(restaurants);
 
         case RestaurantsActions.ADD_REVIEW_RESULT:
             console.log('inside RestaurantReducer.ADD_REVIEW_RESULT', action.payload)

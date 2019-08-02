@@ -29,11 +29,27 @@ function addReviewResult(review) {
     }
 }
 
+function addRestaurant(restaurant) {
+    return {
+        type: RestaurantsActions.ADD_RESTAURANT,
+        payload: restaurant
+    }
+}
+
+function addRestaurantResult(restaurant) {
+    return {
+        type: RestaurantsActions.ADD_RESTAURANT_RESULT,
+        payload: restaurant
+    }
+}
+
 let actions = {
     fetchAllRestaurantsResultAction,
     fetchAllRestaurantsRequest,
     addReview,
     addReviewResult,
+    addRestaurant,
+    addRestaurantResult
 };
 
 export default actions

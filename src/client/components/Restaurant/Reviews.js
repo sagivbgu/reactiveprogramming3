@@ -198,11 +198,11 @@ class Reviews extends Component {
             return this.ratingTopics.includes(lastSelectedOption.label) ? this.topicsGroup : this.starsThresholdsGroup;
         };
 
-        if (this.state.disabledGroups.size == 0) {
+        if (this.state.disabledGroups.size === 0) {
             // First selection
             let group = getLastSelectedOptionRelevantGroup(selectedOptions);
             setDisabledElementOnGroup(group, true);
-        } else if (this.state.disabledGroups.size == 1) {
+        } else if (this.state.disabledGroups.size === 1) {
             if (selectedOptions == null) {
                 // A filter was removed, now there is no selection at all.
                 setDisabledElementOnGroup(this.state.disabledGroups.values().next().value, false);
@@ -243,7 +243,7 @@ class Reviews extends Component {
     }
 
     filterReviews(reviews) {
-        if (this.state.disabledGroups.size != 2) return reviews;
+        if (this.state.disabledGroups.size !== 2) return reviews;
 
         let threshold = parseInt(this.state.choosedThreshold.substr(1));
         return reviews.filter(review => review.ratings[this.state.choosedTopic] > threshold);

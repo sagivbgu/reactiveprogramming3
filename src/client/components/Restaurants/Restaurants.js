@@ -3,14 +3,6 @@ import {connect} from 'react-redux';
 import Gallery from 'react-grid-gallery';
 import actions from "../Restaurants/actions";
 
-const divStyle = {
-    margin: "auto",
-    width: "80%",
-    border: "3px solid white",
-    padding: "10px",
-};
-
-
 class Restaurants extends React.Component {
     constructor(props) {
         super(props);
