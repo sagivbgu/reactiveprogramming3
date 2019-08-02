@@ -1,5 +1,7 @@
 let axios = require('axios');
 let UserModel = require('../model/user');
+let ReviewModel = require('../model/review');
+let RestaurantModel = require('../model/restaurant');
 
 /*async function getImages(tag) {
   const getImagesUrl = `services/rest/?method=flickr.photos.search&api_key=522c1f9009ca3609bcbaf08545f067ad&tags=${tag}&tag_mode=any&per_page=100&format=json&safe_search=1&nojsoncallback=1`;
@@ -62,7 +64,21 @@ module.exports = (app) => {
         let username = req.query.username;
         UserModel.findOne({username: username})
             .then(doc => {
-                doc == null ? res.json({error: `User ${req.body.username} doesn't exist`}) : res.json(getJson(doc));
+                if (doc == null) {
+                    res.json({error: `User ${req.body.username} doesn't exist`})
+                } else {
+                    let docJson = getJson(doc);
+                    ReviewModel.find({reviewerUsername: username})
+                        .then(reviews => {
+                                addRestaurantNamesToReviews(reviews).then(
+                                    (reviews) => {
+                                        docJson.reviews = reviews;
+                                        res.json(docJson)
+                                    }
+                                );
+                            }
+                        );
+                }
             });
     });
 
@@ -111,4 +127,12 @@ async function searchUser(query) {
 
     [usernameSearchResult, locationSearchResult] = await Promise.all([searchByUsername(), searchByLocation()]);
     return usernameSearchResult.map(doc => doc.username).concat(locationSearchResult.map(doc => doc.username));
+}
+
+async function addRestaurantNamesToReviews(reviews) {
+    for (let i = 0; i < reviews.length; i++) {
+        let restaurantDoc = await RestaurantModel.findById(reviews[i].restaurantId);
+        reviews[i]._doc.restaurantName = restaurantDoc.name;
+    }
+    return reviews;
 }

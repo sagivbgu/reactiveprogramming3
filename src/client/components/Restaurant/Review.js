@@ -5,10 +5,13 @@ import yellowstar from "./assets/images/star-yellow.png"
 
 class Review extends Component {
     render() {
+        let restaurantName = this.props.review.restaurantName;
+        let reviewer = this.props.review.reviewerUsername;
+        let reviewTitle = restaurantName ? `${restaurantName} - ${reviewer}'s review` : reviewer;
         return (
             <li key={this.props.index} className="reviews__list-item reset-list block-padding-vertical">
                 <div className="review area">
-                    <h3 className="review__title">{this.props.review.reviewerUsername}</h3>
+                    <h3 className="review__title">{reviewTitle}</h3>
 
                     {this.getDate(this.props.review.date)}
                     <br/>

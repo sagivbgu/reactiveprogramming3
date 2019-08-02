@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import actions from "./actions";
 import LocationAutoSuggestion from "../Registration/LocationAutoSuggestion";
 import PhotoDropzone from "../Registration/PhotoDropzone";
+import Review from "../Restaurant/Review";
 
 class Profile extends React.Component {
     // this.props.match.params.user is the user that its profile is wanted
@@ -75,6 +76,11 @@ class Profile extends React.Component {
                         <div> Photo:</div>
                         <img src={photo} width={400} height={400}/>
                     </label>
+                    <div> Reviews:</div>
+
+                    {this.props.reviews.map((review, index) => (
+                        <Review key={index} index={index} review={review}/>
+                    ))}
 
                     <div hidden={!editable}>
                         <h2> Update profile </h2>
