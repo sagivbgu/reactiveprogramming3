@@ -35,7 +35,10 @@ class HomePage extends React.Component {
                 <div>
                     {loggedUser && <button className={'link'} onClick={this.onLogoutClicked}> Logout </button>}
                 </div>
-                <Restaurants history={this.props.history}/>
+                <div>
+                    <h2>Restaurants</h2>
+                    <Restaurants history={this.props.history}/>
+                </div>
             </div>
         );
     }
