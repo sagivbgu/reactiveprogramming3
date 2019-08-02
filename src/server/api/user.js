@@ -130,9 +130,11 @@ async function searchUser(query) {
 }
 
 async function addRestaurantNamesToReviews(reviews) {
-    for (let i = 0; i < reviews.length; i++) {
-        let restaurantDoc = await RestaurantModel.findById(reviews[i].restaurantId);
-        reviews[i]._doc.restaurantName = restaurantDoc.name;
-    }
-    return reviews;
+    return await Promise.all(reviews.map(
+        async (review) => {
+            let restaurantDoc = await RestaurantModel.findById(review.restaurantId);
+            review._doc.restaurantName = restaurantDoc.name;
+            return review;
+        })
+    );
 }
