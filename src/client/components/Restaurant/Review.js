@@ -41,6 +41,9 @@ class Review extends Component {
 
 
     getDate(date) {
+        if (typeof date === "string") {
+            date = new Date(date);
+        }
         if (typeof date === 'object') {
             return (
                 <span className="review__date">
