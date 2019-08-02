@@ -76,7 +76,9 @@ class Profile extends React.Component {
                         <div> Photo:</div>
                         <img src={photo} width={400} height={400}/>
                     </label>
-                    <div> Reviews:</div>
+                    <label>
+                        <div> Reviews:</div>
+                    </label>
 
                     {this.props.reviews.map((review, index) => (
                         <Review key={index} index={index} review={review}/>
