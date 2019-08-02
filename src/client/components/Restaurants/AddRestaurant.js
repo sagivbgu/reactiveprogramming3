@@ -88,7 +88,7 @@ class AddRestaurant extends React.Component {
     onChange(event) {
         const target = event.target;
 
-        let restaurantNameAlreadyExists = false;
+        let restaurantNameAlreadyExists = this.state.restaurantNameAlreadyExists;
         if (target.name == "name") {
             let restaurant = this.props.restaurants.find(restaurant => {
                 return restaurant.name === target.value;
@@ -115,6 +115,10 @@ class AddRestaurant extends React.Component {
         }
 
         this.setState({allFieldsAnsweredOnSubmit: allFieldsAnsweredOnSubmit});
+
+        if (this.state.restaurantNameAlreadyExists) {
+            return;
+        }
 
         if (allFieldsAnsweredOnSubmit) {
             this.props.addRestaurant({

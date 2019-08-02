@@ -2,10 +2,53 @@
 [ID] [NAME]
 
 - Project design
-    - **TODO**
+    - App:
+    	* Check if the user is already loggged in (using cookies), if it is, redirects it to HomePage,
+    	  if not, redirects to login page.
+
+    - Registration:
+    	* Implements the whole login/register mechanism.
+
+    - HomePage:
+    	* The first page the user sees (after a successful login).
+    	* Contains links to the whole system.
+
+    - Profile:
+    	* Displays the profile of the logged user.
+
+   	- UserSearch:
+   		* Enables the user to search other users profiles.
+
+    - Restaurants:
+    	* Displays a gallery of restaurants. 
+    	* The user is able to click on a specific picture (restaurant) and then enters to the restaurant.
+    	* There is a "search restaurants" with auto-suggest feature, the user is able to search by name & location.
+    	* Enables to add a new restaurant.
+
+    - Restaurant:
+    	* Displays the restaurant's name & location and it's reviews.
+    	* Implements the required sorting/filtering reviews feature.
+
+
 
 - Features implemented, the Model you’ve implemented using Mongoose
-    - **TODO**
+    - UserModel:
+    	* Contains the details of a specific user: username, photo & location.
+
+    - ReviewModel:
+    	* Contains the required details of a review:
+    		- restaurantId - the restaurant record the review was written for.
+    		- reviewerUsername
+    		- text - The review text.
+    		- date - The date the review was submitted on.
+    		- ratings - The ratings the user choosed.
+
+    - RestaurantModel:
+    	* Contains the details on a specific restaurant:
+    		- name & location.
+    		- thumbnail - A link of the restaurant photo that will be displayed in the gallery.
+    		- thumbnailHeight & thumbnailWidth - The dimensions of the restaurant photo.
+
 
 - Flow example: Searching a user 
     - In user search screen (`UserSearch` component), text is inserted to the search bar.
@@ -31,7 +74,6 @@
     - react-dropzone: For uploading photos.
     - react-rating: For showing the restaurants' ratings (stars).
     - react-grid-gallery: For showing the restaurants in the search page.
-    - react-select: **TODO**
-    - moment: **TODO**
-    - **TODO: Where did we get the style (css) from?** 
+    - react-select: For the sorting & filtering dropdowns.
+    - moment: For dealing with dates much easier.
 
