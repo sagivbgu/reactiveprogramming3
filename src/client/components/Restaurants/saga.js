@@ -3,10 +3,10 @@ import {call, put, takeLatest, all} from 'redux-saga/effects'
 import {RestaurantsActions} from "../Restaurants/constants";
 
 
-const FETCH_ALL_RESTAURANTS = '/api/restaurants/fetchall'
-const ADD_REVIEW_URL = '/api/restaurant/addreview'
-const ADD_RESTAURANT_URL = '/api/restaurant/addrestaurant'
-
+const FETCH_ALL_RESTAURANTS = '/api/restaurants/fetchall';
+const ADD_REVIEW_URL = '/api/restaurant/addreview';
+const ADD_RESTAURANT_URL = '/api/restaurant/addrestaurant';
+const SEARCH_RESTAURANTS_URL = '/api/restaurants/search';
 
 function* fetchAllRestaurantsRequest(action) {
     try {
@@ -14,14 +14,13 @@ function* fetchAllRestaurantsRequest(action) {
         const json = yield call([res, 'json']); //retrieve body of response
         yield put(Actions.fetchAllRestaurantsResultAction(json));
     } catch (e) {
-        // TOOD
+        // TODO
     }
 }
 
 function* fetchAllRestaurantsSaga() {
     yield takeLatest(RestaurantsActions.FETCH_ALL_RESTAURANTS, fetchAllRestaurantsRequest);
 }
-
 
 function* addReview(action) {
     try {
@@ -75,6 +74,26 @@ function* addRestaurant(action) {
     }
 }
 
+function* searchRestaurant(action) {
+    try {
+        let params = new URLSearchParams();
+        params.append('query', encodeURIComponent(action.payload.query));
+        params.append('byName', action.payload.byName);
+        params.append('byLocation', action.payload.byLocation);
+
+        const res = yield call(fetch, SEARCH_RESTAURANTS_URL + '?' + params);
+        const json = yield call([res, 'json']); //retrieve body of response
+
+        if (json.error) {
+            yield put(Actions.searchRestaurantFailureAction(json.error));
+        } else {
+            yield put(Actions.searchRestaurantSuccessAction(json));
+        }
+    } catch (e) {
+            yield put(Actions.searchRestaurantFailureAction(e.message));
+    }
+}
+
 function* addReviewSaga() {
     yield takeLatest(RestaurantsActions.ADD_REVIEW, addReview);
 }
@@ -84,11 +103,17 @@ function* addRestaurantSaga() {
     yield takeLatest(RestaurantsActions.ADD_RESTAURANT, addRestaurant);
 }
 
+function* searchRestaurantSaga() {
+    console.log('inside search restaurant saga');
+    yield takeLatest(RestaurantsActions.SEARCH_RESTAURANT, searchRestaurant);
+}
+
 function* RestaurantsSaga() {
     yield all([
         fetchAllRestaurantsSaga(),
         addReviewSaga(),
-        addRestaurantSaga()
+        addRestaurantSaga(),
+        searchRestaurantSaga()
     ]);
 }
 

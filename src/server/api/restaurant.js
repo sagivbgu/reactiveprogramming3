@@ -21,6 +21,37 @@ module.exports = (app) => {
         res.json(restaurants);
     });
 
+    app.get('/api/restaurants/search', async function (req, res) {
+        console.log('inside /api/restaurants/search');
+        let query = new RegExp(req.query.query, "i");
+        let filter = {};
+        if (req.query.byName === 'true') {
+            filter.name = query;
+        }
+        if (req.query.byLocation === 'true') {
+            filter.location = query;
+        }
+
+        try {
+            let restaurants = await RestaurantModel.find(filter);
+            restaurants = await Promise.all(restaurants.map(async restaurant => {
+                return {
+                    _id: restaurant._id,
+                    name: restaurant.name,
+                    location: restaurant.location,
+                    thumbnail: restaurant.thumbnail,
+                    thumbnailWidth: restaurant.thumbnailWidth,
+                    thumbnailHeight: restaurant.thumbnailHeight,
+                    reviews: await ReviewModel.find({"restaurantId": restaurant._id})
+                };
+            }));
+
+            res.json(restaurants);
+        } catch (e) {
+            res.json({error: e.message});
+        }
+    });
+
     app.post('/api/restaurant/addrestaurant', async function (req, res) {
         console.log('in restaurant addrestaurant');
 

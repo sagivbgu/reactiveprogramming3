@@ -43,13 +43,47 @@ function addRestaurantResult(restaurant) {
     }
 }
 
+function searchRestaurantAction(query, byName, byLocation) {
+    return {
+        type: RestaurantsActions.SEARCH_RESTAURANT,
+        payload: {
+            query,
+            byName,
+            byLocation
+        }
+    }
+}
+function searchRestaurantSuccessAction(restaurants) {
+    return {
+        type: RestaurantsActions.SEARCH_RESTAURANT_SUCCESS,
+        payload: restaurants
+    }
+}
+
+function searchRestaurantFailureAction(error) {
+    return {
+        type: RestaurantsActions.SEARCH_RESTAURANT_FAILURE,
+        payload: error
+    }
+}
+
+function clearRestaurantSearchAction() {
+    return {
+        type: RestaurantsActions.CLEAR_RESTAURANT_SEARCH
+    }
+}
+
 let actions = {
     fetchAllRestaurantsResultAction,
     fetchAllRestaurantsRequest,
     addReview,
     addReviewResult,
     addRestaurant,
-    addRestaurantResult
+    addRestaurantResult,
+    searchRestaurantAction,
+    searchRestaurantSuccessAction,
+    searchRestaurantFailureAction,
+    clearRestaurantSearchAction
 };
 
 export default actions
