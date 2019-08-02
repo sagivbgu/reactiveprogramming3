@@ -6,6 +6,7 @@ import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
 import createSagaMiddleware from 'redux-saga';
 import Sagas from './sagas';
+
 import Registration from "./components/Registration";
 import Login from "./components/Registration/Login";
 import App from "./components/App/App";

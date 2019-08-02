@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import './registration.scss';
 import actions from './actions';
 import LocationAutoSuggestion from "./LocationAutoSuggestion";
 import {Link, Redirect} from "react-router-dom";

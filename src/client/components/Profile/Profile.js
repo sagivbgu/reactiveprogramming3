@@ -88,6 +88,7 @@ class Profile extends React.Component {
                             review = review.toJS();
                             let reviewComponent = <Review key={index} index={index} review={review}/>;
                             let deleteReviewComponent = <button type="button"
+                                                                className={"link"}
                                                                 onClick={() => this.onDeleteReview(review, index)}>
                                 Delete review </button>;
                             let deletableReviewComponent = <div key={index}>

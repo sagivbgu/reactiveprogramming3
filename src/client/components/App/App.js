@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.scss';
 import {connect} from 'react-redux';
 import {Redirect} from "react-router-dom";
+import './app.scss'
 
 class App extends React.Component {
     render() {

@@ -28,7 +28,7 @@ class HomePage extends React.Component {
                     <Link to="/user/search">Search users</Link>
                 </div>
                 <div>
-                    {loggedUser && <button onClick={this.onLogoutClicked}> Logout </button>}
+                    {loggedUser && <button className={'link'} onClick={this.onLogoutClicked}> Logout </button>}
                 </div>
                 <Restaurants history={this.props.history}/>
             </div>
